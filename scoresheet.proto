@@ -1,0 +1,586 @@
+syntax = "proto3";
+
+import "google/protobuf/descriptor.proto";
+
+option optimize_for = CODE_SIZE;
+
+package Protobuf;
+
+extend google.protobuf.FieldOptions {
+	string	display_name	= 50200;
+	int32	indent_levels	= 50201;
+	bool	skip_zero	= 50202;
+//tk remove this when conversion complete --v
+	bool	always_display	= 50203;
+}
+
+extend google.protobuf.EnumValueOptions {
+	string enum_display_name = 50300;
+}
+
+message Scoresheet {
+	Header			header			= 1;
+	Performance		performance		= 2;
+	Bonus			bonus			= 3;
+	Cogmind			cogmind			= 4;
+	Parts			parts			= 5;
+	PeakState		peak_state		= 6;
+	Favorites		favorites		= 7;
+//tk route/stats	
+//	Stats			stats			= 8;
+	History			history			= 9;
+	LastMessages		last_messages		= 10;
+	Map			map			= 11;
+	BestStates		best_states		= 12;
+	ItemSchematics		item_schematics		= 13;
+	RobotSchematics		robot_schematics	= 14;
+	Fabricated		fabricated		= 15;
+	AlienTechUsed		alien_tech_used		= 16;
+	Achievements		achievements		= 17;
+	Challenges		challenges		= 18;
+	CogshopPurchases	cogshop_purchases	= 19;
+	Game			game			= 20;
+	Options			options			= 21;
+	Meta			meta			= 22;
+	HiddenMeta		hidden_meta		= 23;
+}
+
+//------------------------------------------------------------------
+// Header
+//------------------------------------------------------------------
+
+enum DifficultyType {
+	DIFFICULTY_ROGUE	= 0	[(enum_display_name)="Rogue"		];
+	DIFFICULTY_ADVENTURER	= 1	[(enum_display_name)="Adventurer"	];
+	DIFFICULTY_EXPLORER	= 2	[(enum_display_name)="Explorer"		];
+	DIFFICULTY_WIZARD_MODE	= 3	[(enum_display_name)="Wizard"		];
+}
+enum SpecialModeType {
+	SPECIAL_MODE_NONE		= 0	[(enum_display_name)="None"			];
+	SPECIAL_MODE_AFD_LAUNCHERS	= 1	[(enum_display_name)="AFD2018/Launchers"	];
+	SPECIAL_MODE_AFD_PAY2BUY	= 2	[(enum_display_name)="AFD2019/Pay2Buy"		];
+	SPECIAL_MODE_AFD_ARCADE		= 3	[(enum_display_name)="AFD2050/Arcade"		];
+}
+message Header {
+	string		filename	= 1;
+	string		version		= 2;
+	DifficultyType	difficulty	= 3;
+	string		run_end_date	= 4;
+	string		run_end_time	= 5;
+	SpecialModeType	special_mode	= 6;
+	string		player_name	= 7;
+	string		run_result	= 8;
+	bool		win		= 9;
+}
+
+//------------------------------------------------------------------
+// Performance
+//------------------------------------------------------------------
+
+message Performance {
+	message Entry {
+		int32 count	= 1;
+		int32 points	= 2;
+	}
+	int32 total_score		= 1;	// [(display_name)="Total"		];
+	Entry evolutions		= 2;	// [(display_name)="Evolutions"		];
+	Entry regions_visited		= 3;	// [(display_name)="Regions Visited"	];
+	Entry robots_destroyed		= 4;	// [(display_name)="Robots Destroyed"	];
+	Entry value_destroyed		= 5;	// [(display_name)="Value Destroyed"	];
+	Entry prototypes_identified	= 7;	// [(display_name)="Prototype IDs"	];
+	Entry alien_tech_used		= 8;	// [(display_name)="Alien Tech Used"	];
+	Entry bonus			= 9;	// [(display_name)="Bonus"		];
+}
+
+//------------------------------------------------------------------
+// Bonus
+//------------------------------------------------------------------
+
+message Bonus {
+	int32 devolution		= 1	[(display_name)="Devolution"			,(skip_zero)=true	];
+	int32 fragile_parts		= 2	[(display_name)="Fragile Parts"			,(skip_zero)=true	];
+	int32 gauntlet			= 3	[(display_name)="Gauntlet"			,(skip_zero)=true	];
+	int32 inhibited_evolution	= 4	[(display_name)="Inhibited Evolution"		,(skip_zero)=true	];
+	int32 no_salvage		= 5	[(display_name)="No Salvage"			,(skip_zero)=true	];
+	int32 pure_core			= 6	[(display_name)="Pure Core"			,(skip_zero)=true	];
+	int32 scavenger			= 7	[(display_name)="Scavenger"			,(skip_zero)=true	];
+	int32 simple_hacker		= 8	[(display_name)="Simple Hacker"			,(skip_zero)=true	];
+	int32 sticky_parts		= 9	[(display_name)="Sticky Parts"			,(skip_zero)=true	];
+	int32 super_gauntlet		= 10	[(display_name)="Super Gauntlet"		,(skip_zero)=true	];
+	int32 trapped			= 11	[(display_name)="Trapped"			,(skip_zero)=true	];
+	int32 unstable_evolution	= 12	[(display_name)="Unstable Evolution"		,(skip_zero)=true	];
+	int32 pacifist			= 13	[(display_name)="Pacifist"			,(skip_zero)=true	];
+	int32 triggered_high_security	= 14	[(display_name)="Triggered High Security"	,(skip_zero)=true	];
+	int32 triggered_max_security	= 15	[(display_name)="Triggered Max Security"	,(skip_zero)=true	];
+	int32 high_alert_combat_kills	= 16	[(display_name)="High Alert Combat Kills"	,(skip_zero)=true	];
+	int32 follower_combat_kills	= 17	[(display_name)="Follower Combat Kills"		,(skip_zero)=true	];
+	int32 entered_garrisons		= 18	[(display_name)="Entered Garrisons"		,(skip_zero)=true	];
+	int32 used_rif_installer	= 19	[(display_name)="Used RIF Installer"		,(skip_zero)=true	];
+	int32 network_hubs_disabled	= 20	[(display_name)="Network Hubs Disabled"		,(skip_zero)=true	];
+	int32 aligned_with_farcom	= 21	[(display_name)="Aligned with FarCom"		,(skip_zero)=true	];
+	int32 met_data_miner		= 22	[(display_name)="Met Data Miner"		,(skip_zero)=true	];
+	int32 used_data_conduit		= 23	[(display_name)="Used Data Conduit"		,(skip_zero)=true	];
+	int32 met_imprinter		= 24	[(display_name)="Met Imprinter"			,(skip_zero)=true	];
+	int32 was_imprinted		= 25	[(display_name)="Was Imprinted"			,(skip_zero)=true	];
+	int32 destroyed_zimprinter	= 26	[(display_name)="Destroyed Z-Imprinter"		,(skip_zero)=true	];
+	int32 triggered_deep_caves_wall	= 27	[(display_name)="Triggered Deep Caves Wall"	,(skip_zero)=true	];
+	int32 exposed_golem_chamber	= 28	[(display_name)="Exposed GOLEM Chamber"		,(skip_zero)=true	];
+	int32 met_zhirov		= 29	[(display_name)="Met Zhirov"			,(skip_zero)=true	];
+	int32 met_warlord_at_base	= 30	[(display_name)="Met Warlord at Base"		,(skip_zero)=true	];
+	int32 mainc_attacked_warlord	= 31	[(display_name)="MAIN.C Attacked Warlord"	,(skip_zero)=true	];
+	int32 warlord_defense_kill	= 32	[(display_name)="Warlord Defense Kill"		,(skip_zero)=true	];
+	int32 built_enhanced_grunts	= 33	[(display_name)="Built Enhanced Grunts"		,(skip_zero)=true	];
+	int32 a7_reached_mainframe	= 34	[(display_name)="A7 Reached Mainframe"		,(skip_zero)=true	];
+	int32 met_r17_at_cetus		= 35	[(display_name)="Met R17 at Cetus"		,(skip_zero)=true	];
+	int32 read_decrypted_archives	= 36	[(display_name)="Read Decrypted Archives"	,(skip_zero)=true	];
+	int32 found_hidden_lab		= 37	[(display_name)="Found Hidden Lab"		,(skip_zero)=true	];
+	int32 decrypted_a0_command	= 38	[(display_name)="Decrypted A0 Command"		,(skip_zero)=true	];
+	int32 used_core_reset_matrix	= 39	[(display_name)="Used Core Reset Matrix"	,(skip_zero)=true	];
+	int32 hacked_protovariant	= 40	[(display_name)="Hacked Protovariant"		,(skip_zero)=true	];
+	int32 met_r17_at_research	= 41	[(display_name)="Met R17 at Research"		,(skip_zero)=true	];
+	int32 met_warlord_at_research	= 42	[(display_name)="Met Warlord at Research"	,(skip_zero)=true	];
+	int32 hacked_god_mode		= 43	[(display_name)="Hacked God Mode"		,(skip_zero)=true	];
+	int32 scanned_by_researcher	= 44	[(display_name)="Scanned by Researcher"		,(skip_zero)=true	];
+	int32 pursued_by_intercept	= 45	[(display_name)="Pursued by Intercept"		,(skip_zero)=true	];
+	int32 acquired_sgemp		= 46	[(display_name)="Acquired SGEMP"		,(skip_zero)=true	];
+	int32 met_sigix			= 47	[(display_name)="Met Sigix"			,(skip_zero)=true	];
+	int32 detonated_l2_power_cell	= 48	[(display_name)="Detonated L2 Power Cell"	,(skip_zero)=true	];
+	int32 activated_exoskeleton	= 49	[(display_name)="Activated Exoskeleton"		,(skip_zero)=true	];
+	int32 delivered_sgemp		= 50	[(display_name)="Delivered SGEMP"		,(skip_zero)=true	];
+	int32 recovered_sigix_corpse	= 51	[(display_name)="Recovered Sigix Corpse"	,(skip_zero)=true	];
+	int32 escaped_with_sigix	= 52	[(display_name)="Escaped with Sigix"		,(skip_zero)=true	];
+	int32 escaped_with_exosigix	= 53	[(display_name)="Escaped with Exo-Sigix"	,(skip_zero)=true	];
+	int32 destroyed_mainc_guards	= 54	[(display_name)="Destroyed MAIN.C Guards"	,(skip_zero)=true	];
+	int32 met_mainc			= 55	[(display_name)="Met MAIN.C"			,(skip_zero)=true	];
+	int32 hacked_mainc		= 56	[(display_name)="Hacked MAIN.C"			,(skip_zero)=true	];
+	int32 destroyed_mainc_shell	= 57	[(display_name)="Destroyed MAIN.C Shell"	,(skip_zero)=true	];
+	int32 destroyed_mainc		= 58	[(display_name)="Destroyed MAIN.C"		,(skip_zero)=true	];
+	int32 zhirov_destroyed_mainc	= 59	[(display_name)="Zhirov Destroyed MAIN.C"	,(skip_zero)=true	];
+	int32 used_0b10_conduit		= 60	[(display_name)="Used 0b10 Conduit"		,(skip_zero)=true	];
+	int32 met_architect		= 61	[(display_name)="Met Architect"			,(skip_zero)=true	];
+	int32 started_test_138b		= 62	[(display_name)="Started Test 138-B"		,(skip_zero)=true	];
+	int32 started_test_138c		= 63	[(display_name)="Started Test 138-C"		,(skip_zero)=true	];
+	int32 destroyed_a8		= 64	[(display_name)="Destroyed A8"			,(skip_zero)=true	];
+	int32 destroyed_a6		= 65	[(display_name)="Destroyed A6"			,(skip_zero)=true	];
+	int32 destroyed_a5		= 66	[(display_name)="Destroyed A5"			,(skip_zero)=true	];
+	int32 destroyed_a4		= 67	[(display_name)="Destroyed A4"			,(skip_zero)=true	];
+	int32 destroyed_a3		= 68	[(display_name)="Destroyed A3"			,(skip_zero)=true	];
+	int32 destroyed_a2		= 69	[(display_name)="Destroyed A2"			,(skip_zero)=true	];
+	int32 destroyed_architect	= 70	[(display_name)="Destroyed Architect"		,(skip_zero)=true	];
+	int32 win			= 71	[(display_name)="Win"				,(skip_zero)=true	];
+	int32 win_speed			= 72	[(display_name)="Win Speed"			,(skip_zero)=true	];
+	int32 challenge_win		= 73	[(display_name)="Challenge Win"			,(skip_zero)=true	];
+	int32 friendly_fire		= 74	[(display_name)="Friendly Fire"			,(skip_zero)=true	];
+}
+
+//------------------------------------------------------------------
+// Cogmind
+//------------------------------------------------------------------
+
+enum MapType {
+	MAP_NONE = 0;
+	MAP_SAN = 1	[(enum_display_name)="Sandbox"			];
+	MAP_SCR = 2	[(enum_display_name)="Scrapyard"		];
+	MAP_MAT = 3	[(enum_display_name)="Materials"		];
+	MAP_FAC = 4	[(enum_display_name)="Factory"			];
+	MAP_RES = 5	[(enum_display_name)="Research"			];
+	MAP_ACC = 6	[(enum_display_name)="Access"			];
+	MAP_SUR = 7	[(enum_display_name)="Surface"			];
+	MAP_MIN = 8	[(enum_display_name)="Mines"			];
+	MAP_EXI = 9	[(enum_display_name)="Exiles"			];
+	MAP_STO = 10	[(enum_display_name)="Storage"			];
+	MAP_REC = 11	[(enum_display_name)="Recycling"		];
+	MAP_WAS = 12	[(enum_display_name)="Waste"			];
+	MAP_GAR = 13	[(enum_display_name)="Garrison"			];
+	MAP_LOW = 14	[(enum_display_name)="Lower Caves"		];
+	MAP_UPP = 15	[(enum_display_name)="Upper Caves"		];
+	MAP_PRO = 16	[(enum_display_name)="Proximity Caves"		];
+	MAP_DEE = 17	[(enum_display_name)="Deep Caves"		];
+	MAP_ZIO = 18	[(enum_display_name)="Zion"			];
+	MAP_DAT = 19	[(enum_display_name)="Data Miner"		];
+	MAP_ZHI = 20	[(enum_display_name)="Zhirov"			];
+	MAP_WAR = 21	[(enum_display_name)="Warlord"			];
+	MAP_EXT = 22	[(enum_display_name)="Extension"		];
+	MAP_CET = 23	[(enum_display_name)="Cetus"			];
+	MAP_ARC = 24	[(enum_display_name)="Archives"			];
+	MAP_HUB = 25	[(enum_display_name)="Hub_04(d)"		];
+	MAP_ARM = 26	[(enum_display_name)="Armory"			];
+	MAP_LAB = 27	[(enum_display_name)="Lab"			];
+	MAP_QUA = 28	[(enum_display_name)="Quarantine"		];
+	MAP_TES = 29	[(enum_display_name)="Testing"			];
+	MAP_SEC = 30	[(enum_display_name)="Section 7"		];
+	MAP_COM = 31	[(enum_display_name)="Command"			];
+	MAP_AC0 = 32	[(enum_display_name)="Access_0"			];
+	MAP_W00 = 33	[(enum_display_name)="To Epsilon Eridani"	]; // wins
+	MAP_W01 = 34	[(enum_display_name)="0b11 Command"		];
+	MAP_W02 = 35	[(enum_display_name)="To Fleet Rendezvous"	];
+	MAP_W03 = 36	[(enum_display_name)="Tau Ceti IV Orbit"	];
+	MAP_W04 = 37	[(enum_display_name)="0b10 Command"		];
+	MAP_W05 = 38	[(enum_display_name)="Subspace"			];
+	MAP_W06 = 39	[(enum_display_name)="Near Former Tau Ceti IV"	];
+}
+enum HeatLevelType {
+	HEAT_COOL	= 0	[(enum_display_name)="Cool"	];
+	HEAT_WARM	= 1	[(enum_display_name)="Warm"	];
+	HEAT_HOT	= 2	[(enum_display_name)="Hot"	];
+	HEAT_WARNING	= 3	[(enum_display_name)="Warning"	];
+	HEAT_DANGER	= 4	[(enum_display_name)="Danger"	];
+	HEAT_CRITICAL	= 5	[(enum_display_name)="Critical"	];
+}
+message Location {
+	sint32	depth = 1; // 0 if N/A (win)
+	MapType	place = 2;
+}
+message Cogmind {
+	message VariableValue {
+		int32 current	= 1;
+		int32 maximum	= 2;
+	}
+	message Temperature {
+		HeatLevelType	heat	= 1;
+		int32		value	= 2;
+	}
+	VariableValue	core_integrity		= 1;
+	VariableValue	matter			= 2;
+	VariableValue	energy			= 3;
+	int32		system_corruption	= 4;
+	Temperature	temperature		= 5;
+	Location	location		= 6;
+}
+
+//------------------------------------------------------------------
+// Parts
+//------------------------------------------------------------------
+
+message PartSection {
+	int32		slots = 1;
+	repeated string parts = 2;
+}
+
+message Parts {
+	PartSection	power		= 1;
+	PartSection	propulsion	= 2;
+	PartSection	utility		= 3;
+	PartSection	weapon		= 4;
+	PartSection	inventory	= 5;
+}
+
+message PeakState {
+	PartSection	power		= 1;
+	PartSection	propulsion	= 2;
+	PartSection	utility		= 3;
+	PartSection	weapon		= 4;
+	PartSection	inventory	= 5;
+	int32		rating		= 6;
+}
+
+//------------------------------------------------------------------
+// Favorites
+//------------------------------------------------------------------
+
+message Favorites {
+	message Power {
+		string overall			= 1;
+		string engine			= 2;
+		string power_core		= 3;
+		string reactor			= 4;
+	}
+	message Propulsion {
+		string overall			= 1;
+		string treads			= 2;
+		string wheel			= 3;
+		string leg			= 4;
+		string hover_unit		= 5;
+		string flight_unit		= 6;
+	}
+	message Utility {
+		string overall			= 1;
+		string device			= 2;
+		string storage			= 3;
+		string processor		= 4;
+		string hackware			= 5;
+		string protection		= 6;
+		string artifact			= 7;
+	}
+	message Weapon {
+		string overall			= 1;
+		string energy_gun		= 2;
+		string energy_cannon		= 3;
+		string ballistic_gun		= 4;
+		string ballistic_cannon		= 5;
+		string launcher			= 6;
+		string special_weapon		= 7;
+		string impact_weapon		= 8;
+		string slashing_weapon		= 9;
+		string piercing_weapon		= 10;
+		string special_melee_weapon	= 11;
+	}
+	Power		power		= 1;
+	Propulsion	propulsion	= 2;
+	Utility		utility		= 3;
+	Weapon		weapon		= 4;
+}
+
+//------------------------------------------------------------------
+//tk - all stat categories
+//------------------------------------------------------------------
+
+//tk
+
+//------------------------------------------------------------------
+// History
+//------------------------------------------------------------------
+
+message History {
+	message Entry {
+		int32		turn		= 1;
+		Location	location	= 2; //tk Will might want to (probably...) actually separate each section of History into the section of Route that it pertains to, eh? that would do away with the Location part of the entry here
+		string		event		= 3;
+	}
+	repeated Entry events = 1;
+}
+
+//------------------------------------------------------------------
+// Last Messages
+//------------------------------------------------------------------
+
+message LastMessages {
+	repeated string messages = 1;
+}
+
+//------------------------------------------------------------------
+// Map
+//------------------------------------------------------------------
+
+message Map {
+	repeated string lines = 1;
+}
+
+//------------------------------------------------------------------
+// Best States
+//------------------------------------------------------------------
+
+message BestStates {
+	int32 heat_dissipation		= 1	[(display_name)="Heat Dissipation"		,(skip_zero)=true	];
+	int32 coolant_potential		= 2	[(display_name)="Coolant Potential"		,(skip_zero)=true	];
+	int32 energy_generation		= 3	[(display_name)="Energy Generation"		,(skip_zero)=true	];
+	int32 energy_capacity		= 4	[(display_name)="Energy Capacity"		,(skip_zero)=true	];
+	int32 matter_stores		= 5	[(display_name)="Matter Stores"			,(skip_zero)=true	];
+	int32 matter_capacity		= 6	[(display_name)="Matter Capacity"		,(skip_zero)=true	];
+	int32 sight_range		= 7	[(display_name)="Sight Range"			,(skip_zero)=true	];
+	int32 robot_scan_range		= 8	[(display_name)="Robot Scan Range"		,(skip_zero)=true	];
+	int32 terrain_scan_range	= 9	[(display_name)="Terrain Scan Range"		,(skip_zero)=true	];
+	int32 terrain_scan_density	= 10	[(display_name)="Terrain Scan Density"		,(skip_zero)=true	];
+	int32 ecm_strength		= 11	[(display_name)="ECM Strength"			,(skip_zero)=true	];
+	int32 jamming_range		= 12	[(display_name)="Jamming Range"			,(skip_zero)=true	];
+	int32 cloak_strength		= 13	[(display_name)="Cloak Strength"		,(skip_zero)=true	];
+	int32 power_amplification	= 14	[(display_name)="Power Amplification"		,(skip_zero)=true	];
+	int32 additional_mass_support	= 15	[(display_name)="Additional Mass Support"	,(skip_zero)=true	];
+	int32 base_temperature		= 16	[(display_name)="Base Temperature (-)"		,(skip_zero)=true	];
+	int32 em_shielding		= 17	[(display_name)="EM Shielding"			,(skip_zero)=true	];
+	int32 corruption_prevention	= 18	[(display_name)="Corruption Prevention"		,(skip_zero)=true	];
+	int32 heat_shielding		= 19	[(display_name)="Heat Shielding"		,(skip_zero)=true	];
+	int32 armor_coverage		= 20	[(display_name)="Armor Coverage"		,(skip_zero)=true	];
+	int32 resistance_ki		= 21	[(display_name)="Resistance: KI"		,(skip_zero)=true	];
+	int32 resistance_th		= 22	[(display_name)="Resistance: TH"		,(skip_zero)=true	];
+	int32 resistance_ex		= 23	[(display_name)="Resistance: EX"		,(skip_zero)=true	];
+	int32 resistance_em		= 24	[(display_name)="Resistance: EM"		,(skip_zero)=true	];
+	int32 resistance_i		= 25	[(display_name)="Resistance: I"			,(skip_zero)=true	];
+	int32 resistance_s		= 26	[(display_name)="Resistance: S"			,(skip_zero)=true	];
+	int32 resistance_p		= 27	[(display_name)="Resistance: P"			,(skip_zero)=true	];
+	int32 core_shielding		= 28	[(display_name)="Core Shielding"		,(skip_zero)=true	];
+	int32 power_shielding		= 29	[(display_name)="Power Shielding"		,(skip_zero)=true	];
+	int32 propulsion_shielding	= 30	[(display_name)="Propulsion Shielding"		,(skip_zero)=true	];
+	int32 utility_shielding		= 31	[(display_name)="Utility Shielding"		,(skip_zero)=true	];
+	int32 weapon_shielding		= 32	[(display_name)="Weapon Shielding"		,(skip_zero)=true	];
+	int32 point_defense_rating	= 33	[(display_name)="Point Defense Rating"		,(skip_zero)=true	];
+	int32 thermal_conversion	= 34	[(display_name)="Thermal Conversion"		,(skip_zero)=true	];
+	int32 reclamation_efficiency	= 35	[(display_name)="Reclamation Efficiency"	,(skip_zero)=true	];
+	int32 weapon_cycling		= 36	[(display_name)="Weapon Cycling"		,(skip_zero)=true	];
+	int32 melee_speed_boost		= 37	[(display_name)="Melee Speed Boost"		,(skip_zero)=true	];
+	int32 phase_shifting		= 38	[(display_name)="Phase Shifting"		,(skip_zero)=true	];
+	int32 evasion			= 39	[(display_name)="Evasion (%)"			,(skip_zero)=true	];
+	int32 targeting_accuracy	= 40	[(display_name)="Targeting Accuracy"		,(skip_zero)=true	];
+	int32 melee_accuracy		= 41	[(display_name)="Melee Accuracy"		,(skip_zero)=true	];
+	int32 launcher_accuracy		= 42	[(display_name)="Launcher Accuracy"		,(skip_zero)=true	];
+	int32 target_analysis		= 43	[(display_name)="Target Analysis"		,(skip_zero)=true	];
+	int32 core_analysis		= 44	[(display_name)="Core Analysis"			,(skip_zero)=true	];
+	int32 armor_integrity_analysis	= 45	[(display_name)="Armor Integrity Analysis"	,(skip_zero)=true	];
+	int32 recoil_reduction		= 46	[(display_name)="Recoil Reduction"		,(skip_zero)=true	];
+	int32 matter_filtering		= 47	[(display_name)="Matter Filtering"		,(skip_zero)=true	];
+	int32 energy_filtering		= 48	[(display_name)="Energy Filtering"		,(skip_zero)=true	];
+	int32 particle_charging		= 49	[(display_name)="Particle Charging"		,(skip_zero)=true	];
+	int32 kinecelleration		= 50	[(display_name)="Kinecelleration"		,(skip_zero)=true	];
+	int32 force_boost		= 51	[(display_name)="Force Boost"			,(skip_zero)=true	];
+	int32 overload_amplification	= 52	[(display_name)="Overload Amplification"	,(skip_zero)=true	];
+	int32 overload_regulation	= 53	[(display_name)="Overload Regulation"		,(skip_zero)=true	];
+	int32 salvage_targeting		= 54	[(display_name)="Salvage Targeting"		,(skip_zero)=true	];
+	int32 stasis_canceling		= 55	[(display_name)="Stasis Canceling"		,(skip_zero)=true	];
+	int32 offensive_hacking		= 56	[(display_name)="Offensive Hacking"		,(skip_zero)=true	];
+	int32 defensive_hacking		= 57	[(display_name)="Defensive Hacking"		,(skip_zero)=true	];
+}
+
+//------------------------------------------------------------------
+// Item Schematics
+//------------------------------------------------------------------
+
+enum SchematicMethodType {
+	SCHEMATIC_METHOD_FREE		= 0	[(enum_display_name)="Free"		];
+	SCHEMATIC_METHOD_HACKED		= 1	[(enum_display_name)="Hacked"		];
+	SCHEMATIC_METHOD_SCANALYZED	= 2	[(enum_display_name)="Scanalyzed"	];
+	SCHEMATIC_METHOD_DOWNLOADED	= 3	[(enum_display_name)="Downloaded"	];
+	SCHEMATIC_METHOD_EXTRACTED	= 4	[(enum_display_name)="Extracted"	];
+	SCHEMATIC_METHOD_REPORTED	= 5	[(enum_display_name)="Reported"		];
+	SCHEMATIC_METHOD_ZIONITE_INTEL	= 6	[(enum_display_name)="Z-intel"		];
+}
+message ItemSchematics {
+	message Entry {
+		string			name		= 1;
+		Location		location	= 2; //tk Will might want to (probably...) actually separate each section of Item Schematics into the section of Route that it pertains to, eh? that would do away with the Location part of the entry here
+		SchematicMethodType	method		= 3;
+	}
+	repeated Entry schematics = 1;
+}
+
+//------------------------------------------------------------------
+// Robot Schematics
+//------------------------------------------------------------------
+
+message RobotSchematics {
+	message Entry {
+		string			name		= 1;
+		Location		location	= 2; //tk Will might want to (probably...) actually separate each section of Robot Schematics into the section of Route that it pertains to, eh? that would do away with the Location part of the entry here
+		SchematicMethodType	method		= 3;
+	}
+	repeated Entry schematics = 1;
+}
+
+//------------------------------------------------------------------
+// Fabricated
+//------------------------------------------------------------------
+
+message Fabricated {
+	message Entry {
+		string			name		= 1;
+		Location		location	= 2; //tk Will might want to (probably...) actually separate each section of Fabricated into the section of Route that it pertains to, eh? that would do away with the Location part of the entry here
+		int32			count		= 3;
+		bool			preloaded	= 4;
+	}
+	repeated Entry parts = 1;
+}
+
+//------------------------------------------------------------------
+// Alien Tech Used
+//------------------------------------------------------------------
+
+message AlienTechUsed {
+	repeated string parts = 1;
+}
+
+//------------------------------------------------------------------
+// Achievements
+//------------------------------------------------------------------
+
+message Achievements {
+	repeated string achievements = 1;
+}
+
+//------------------------------------------------------------------
+// Challenges
+//------------------------------------------------------------------
+
+message Challenges {
+	repeated string challenges = 1;
+}
+
+//------------------------------------------------------------------
+// Cogshop Purchases (SPECIAL_MODE_AFD_PAY2BUY)
+//------------------------------------------------------------------
+
+message CogshopPurchases {
+	message Entry {
+		string			name		= 1;
+		int32			cost		= 2;
+	}
+	repeated Entry purchases = 1;
+}
+
+//------------------------------------------------------------------
+// Game
+//------------------------------------------------------------------
+
+message Game {
+	string		world_seed		= 1;
+	bool		world_seed_is_manual	= 2;
+	string		run_time		= 3;
+	string		cumulative_hours	= 4;
+	string		run_start_date		= 5;
+	string		run_start_time		= 6;
+	int32		run_sessions		= 7;
+//tk what about info which is in two sections?
+	//		difficulty in Header
+	//		special_mode in Header
+	int32		game_number		= 8;
+	repeated int32	game_counts		= 9; // length matches DifficultyType, excludes wizard mode
+	sint32		win_type		= 10;
+	int32		win_total		= 11;
+	repeated int32	win_type_history	= 12;	
+	int32		lore_percent		= 13;
+	int32		gallery_percent		= 14;
+	int32		achievement_percent	= 15;
+	bool		wizard_mode_run		= 16;
+}
+
+//------------------------------------------------------------------
+// Options
+//------------------------------------------------------------------
+
+enum MovementInputType {
+	MOVEMENT_INPUT_NUMPAD	= 0	[(enum_display_name)="Numpad"	];
+	MOVEMENT_INPUT_ARROWS	= 1	[(enum_display_name)="Arrows"	];
+	MOVEMENT_INPUT_MOUSE	= 2	[(enum_display_name)="Mouse"	];
+	MOVEMENT_INPUT_VI 	= 3	[(enum_display_name)="Vi"	];
+}
+enum FullscreenType {
+	FULLSCREEN_NONE		= 0;//	[(enum_display_name)="Windowed"			];
+	FULLSCREEN_TRUE		= 1;//	[(enum_display_name)="Fullscreen"		];
+	FULLSCREEN_BORDERLESS	= 2;//	[(enum_display_name)="Windowed Fullscreen"	];
+}
+enum SteamType {
+	STEAM_NONE		= 0;//	[(enum_display_name)="Windowed"			];
+	STEAM_INITIALIZED	= 1;//	[(enum_display_name)="Fullscreen"		];
+	STEAM_UNINITIALIZED	= 2;//	[(enum_display_name)="Windowed Fullscreen"	];
+}
+message Options {
+	bool			asciii			= 1;
+	bool			keyboard		= 2;
+	MovementInputType	movement		= 3;
+	bool			keybinds		= 4;
+	FullscreenType		fullscreen		= 5;
+	string			font_set		= 6;
+	int32			map_width		= 7;
+	int32			map_height		= 8;
+	bool			tactical_hud		= 9;
+	string			render_filters_map	= 10;
+	string			render_filters		= 11;
+	SteamType		steam			= 12;
+	//			wizard mode derivable from difficulty in Header
+}
+
+//------------------------------------------------------------------
+// Meta
+//------------------------------------------------------------------
+
+message Meta {
+	string run_guid = 1;
+}
+
+//------------------------------------------------------------------
+// Hidden Meta
+//------------------------------------------------------------------
+
+message HiddenMeta {
+	string	player_guid	= 1;
+	int32	player_id	= 2;
+	int32	run_id		= 3;
+}
