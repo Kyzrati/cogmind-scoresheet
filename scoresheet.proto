@@ -19,27 +19,27 @@ extend google.protobuf.EnumValueOptions {
 
 message Scoresheet {
 	Header			header			= 1;
-	Performance		performance		= 2;
-	Bonus			bonus			= 3;
-	Cogmind			cogmind			= 4;
-	Parts			parts			= 5;
-	PeakState		peak_state		= 6;
-	Favorites		favorites		= 7;
-	ClassDistribution	class_distribution	= 8;
+	Performance		performance		= 2	[(display_name)="Performance"		];
+	Bonus			bonus			= 3	[(display_name)="Bonus"			];
+	Cogmind			cogmind			= 4	[(display_name)="Cogmind"		];
+	Parts			parts			= 5	[(display_name)="Parts"			];
+	PeakState		peak_state		= 6	[(display_name)="PeakState"		];
+	Favorites		favorites		= 7	[(display_name)="Favorites"		];
+	ClassDistribution	class_distribution	= 8	[(display_name)="Class Distribution"	];
 	HistoryEventWin		history_event_win	= 9; // for a win, this stores info for the last line of the History section (since there is no corresponding Route map, it's simply shown as "***"), otherwise N/A
-	LastMessages		last_messages		= 10;
-	Map			map			= 11;
-	BestStates		best_states		= 12;
-	AlienTechUsed		alien_tech_used		= 13;
-	Achievements		achievements		= 14;
-	Challenges		challenges		= 15;
-	CogshopPurchases	cogshop_purchases	= 16;
-	Game			game			= 17;
-	Options			options			= 18;
-	Meta			meta			= 19;
-	HiddenMeta		hidden_meta		= 20;
-	Stats			stats			= 21;
-	Route			route			= 22;
+	LastMessages		last_messages		= 10	[(display_name)="Last Messages"		];
+	Map			map			= 11	[(display_name)="Map"			];
+	BestStates		best_states		= 12	[(display_name)="Best States"		];
+	AlienTechUsed		alien_tech_used		= 13	[(display_name)="Alien Tech Used"	];
+	Achievements		achievements		= 14	[(display_name)="Achieveemnts"		];
+	Challenges		challenges		= 15	[(display_name)="Challenges"		];
+	CogshopPurchases	cogshop_purchases	= 16	[(display_name)="Cogshop Purchases"	];
+	Game			game			= 17	[(display_name)="Game"			];
+	Options			options			= 18	[(display_name)="Options"		];
+	Meta			meta			= 19	[(display_name)="Meta"			];
+	HiddenMeta		hidden_meta		= 20	[(display_name)="Hidden Meta"		];
+	Stats			stats			= 21	[(display_name)="Stats"			];
+	Route			route			= 22	[(display_name)="Route"			];
 }
 
 //------------------------------------------------------------------
@@ -59,15 +59,15 @@ enum SpecialModeType {
 	SPECIAL_MODE_AFD_ARCADE		= 3	[(enum_display_name)="AFD2050/Arcade"		];
 }
 message Header {
-	string		filename	= 1;
-	string		version		= 2;
-	DifficultyType	difficulty	= 3;
-	string		run_end_date	= 4;
-	string		run_end_time	= 5;
-	SpecialModeType	special_mode	= 6;
-	string		player_name	= 7;
-	string		run_result	= 8;
-	bool		win		= 9;
+	string		filename	= 1	[(display_name)="Filename"		];
+	string		version		= 2	[(display_name)="Version"		];
+	DifficultyType	difficulty	= 3	[(display_name)="Difficulty"		];
+	string		run_end_date	= 4	[(display_name)="Run End Date"		];
+	string		run_end_time	= 5	[(display_name)="Run End Time"		];
+	SpecialModeType	special_mode	= 6	[(display_name)="Special Mode"		];
+	string		player_name	= 7	[(display_name)="Player Name"		];
+	string		run_result	= 8	[(display_name)="Run Result"		];
+	bool		win		= 9	[(display_name)="Win"			];
 }
 
 //------------------------------------------------------------------
@@ -237,12 +237,12 @@ message Cogmind {
 		HeatLevelType	heat	= 1;
 		int32		value	= 2;
 	}
-	VariableValue	core_integrity		= 1;
-	VariableValue	matter			= 2;
-	VariableValue	energy			= 3;
-	int32		system_corruption	= 4;
-	Temperature	temperature		= 5;
-	Location	location		= 6;
+	VariableValue	core_integrity		= 1 [(display_name)="Core Integrity"	];
+	VariableValue	matter			= 2 [(display_name)="Matter"		];
+	VariableValue	energy			= 3 [(display_name)="Energy"		];
+	int32		system_corruption	= 4 [(display_name)="System Corruption"	];
+	Temperature	temperature		= 5 [(display_name)="Temperature"	];
+	Location	location		= 6 [(display_name)="Location"		];
 }
 
 //------------------------------------------------------------------
@@ -255,20 +255,20 @@ message PartSection {
 }
 
 message Parts {
-	PartSection	power		= 1;
-	PartSection	propulsion	= 2;
-	PartSection	utility		= 3;
-	PartSection	weapon		= 4;
-	PartSection	inventory	= 5;
+	PartSection	power		= 1 [(display_name)="Power"		];
+	PartSection	propulsion	= 2 [(display_name)="Propulsion"	];
+	PartSection	utility		= 3 [(display_name)="Utility"		];
+	PartSection	weapon		= 4 [(display_name)="Weapon"		];
+	PartSection	inventory	= 5 [(display_name)="Inventory"		];
 }
 
 message PeakState {
-	PartSection	power		= 1;
-	PartSection	propulsion	= 2;
-	PartSection	utility		= 3;
-	PartSection	weapon		= 4;
-	PartSection	inventory	= 5;
-	int32		rating		= 6;
+	PartSection	power		= 1 [(display_name)="Power"		];
+	PartSection	propulsion	= 2 [(display_name)="Propulsion"	];
+	PartSection	utility		= 3 [(display_name)="Utility"		];
+	PartSection	weapon		= 4 [(display_name)="Weapon"		];
+	PartSection	inventory	= 5 [(display_name)="Inventory"		];
+	int32		rating		= 6 [(display_name)="Rating"		];
 }
 
 //------------------------------------------------------------------
@@ -277,40 +277,40 @@ message PeakState {
 
 message Favorites {
 	message Power {
-		string overall			= 1;
-		string engine			= 2;
-		string power_core		= 3;
-		string reactor			= 4;
+		string overall			= 1  [(display_name)="Power"		];
+		string engine			= 2  [(display_name)="Engine"		];
+		string power_core		= 3  [(display_name)="Power Core"	];
+		string reactor			= 4  [(display_name)="Reactor"		];
 	}
 	message Propulsion {
-		string overall			= 1;
-		string treads			= 2;
-		string wheel			= 3;
-		string leg			= 4;
-		string hover_unit		= 5;
-		string flight_unit		= 6;
+		string overall			= 1  [(display_name)="Propulsion"	];
+		string treads			= 2  [(display_name)="Treads"		];
+		string leg			= 4  [(display_name)="Leg"		];
+		string wheel			= 3  [(display_name)="Wheel"		];
+		string hover_unit		= 5  [(display_name)="Hover Unit"	];
+		string flight_unit		= 6  [(display_name)="Flight Unit"	];
 	}
 	message Utility {
-		string overall			= 1;
-		string device			= 2;
-		string storage			= 3;
-		string processor		= 4;
-		string hackware			= 5;
-		string protection		= 6;
-		string artifact			= 7;
+		string overall			= 1  [(display_name)="Utility"		];
+		string device			= 2  [(display_name)="Device"		];
+		string storage			= 3  [(display_name)="Storage"		];
+		string processor		= 4  [(display_name)="Processor"	];
+		string hackware			= 5  [(display_name)="Hackware"		];
+		string protection		= 6  [(display_name)="Protection"	];
+		string artifact			= 7  [(display_name)="Artifact"		];
 	}
 	message Weapon {
-		string overall			= 1;
-		string energy_gun		= 2;
-		string energy_cannon		= 3;
-		string ballistic_gun		= 4;
-		string ballistic_cannon		= 5;
-		string launcher			= 6;
-		string special_weapon		= 7;
-		string impact_weapon		= 8;
-		string slashing_weapon		= 9;
-		string piercing_weapon		= 10;
-		string special_melee_weapon	= 11;
+		string overall			= 1  [(display_name)="Weapon"			];
+		string energy_gun		= 2  [(display_name)="Energy Gun"		];
+		string energy_cannon		= 3  [(display_name)="Energy Cannon"		];
+		string ballistic_gun		= 4  [(display_name)="Ballistic Gun"		];
+		string ballistic_cannon		= 5  [(display_name)="Ballistic Cannon"		];
+		string launcher			= 6  [(display_name)="Launcher"			];
+		string special_weapon		= 7  [(display_name)="Special Weapon"		];
+		string impact_weapon		= 8  [(display_name)="Impact Weapon"		];
+		string slashing_weapon		= 9  [(display_name)="Slashing Weapon"		];
+		string piercing_weapon		= 10 [(display_name)="Piercing Weapon"		];
+		string special_melee_weapon	= 11 [(display_name)="Special Melee Weapon"	];
 	}
 	Power		power		= 1;
 	Propulsion	propulsion	= 2;
@@ -449,8 +449,8 @@ message Challenges {
 
 message CogshopPurchases {
 	message Purchase {
-		string			name		= 1;
-		int32			cost		= 2;
+		string	name = 1 [(display_name)="Item"];
+		int32	cost = 2 [(display_name)="Cost"];
 	}
 	repeated Purchase purchases = 1;
 }
@@ -460,24 +460,25 @@ message CogshopPurchases {
 //------------------------------------------------------------------
 
 message Game {
-	string		world_seed		= 1;
-	bool		world_seed_is_manual	= 2;
-	string		run_time		= 3;
-	string		cumulative_hours	= 4;
-	string		run_start_date		= 5;
-	string		run_start_time		= 6;
-	int32		run_sessions		= 7;
-	DifficultyType	difficulty		= 8;
-	SpecialModeType	special_mode		= 9;
-	int32		game_number		= 10;
-	repeated int32	game_counts		= 11; // length matches DifficultyType, excludes wizard mode
-	sint32		win_type		= 12;
-	int32		win_total		= 13;
-	repeated int32	win_type_history	= 14;	
-	int32		lore_percent		= 15;
-	int32		gallery_percent		= 16;
-	int32		achievement_percent	= 17;
-	bool		wizard_mode_run		= 18;
+	string		world_seed		= 1  [(display_name)="Seed"		];
+	bool		world_seed_is_manual	= 2  [(display_name)="Manual?"		];
+	string		run_time		= 3  [(display_name)="Play Time"	];
+	string		cumulative_hours	= 4  [(display_name)="Cumulative"	];
+	string		run_start_date		= 5  [(display_name)="Start"		];
+	string		run_start_time		= 6  [(display_name)="End"		];
+	int32		run_sessions		= 7  [(display_name)="Sessions"		];
+	int32		run_loads		= 8  [(display_name)="Manual Loads"	];
+	DifficultyType	difficulty		= 9  [(display_name)="Difficulty"	]; // length matches DifficultyType, excludes wizard mode
+	SpecialModeType	special_mode		= 10 [(display_name)="Special Mode"	];
+	int32		game_number		= 11 [(display_name)="Game No."		];
+	repeated int32	game_counts		= 12; // one for each DifficultyType, excluding wizard mode
+	sint32		win_type		= 13 [(display_name)="Win Type"		];
+	int32		win_total		= 14 [(display_name)="Total"		];	
+	repeated int32	win_type_history	= 15 [(display_name)="Types"		];	
+	int32		lore_percent		= 16 [(display_name)="Lore%"		];
+	int32		gallery_percent		= 17 [(display_name)="Gallery%"		];
+	int32		achievement_percent	= 18 [(display_name)="Achievement%"	];
+	bool		wizard_mode_run		= 19 [(display_name)="Wizard Run"	];
 }
 
 //------------------------------------------------------------------
@@ -501,19 +502,19 @@ enum SteamType {
 	STEAM_UNINITIALIZED	= 2	[(enum_display_name)="Uninitialized"	];
 }
 message Options {
-	bool			ascii			= 1;
-	bool			keyboard		= 2;
-	MovementInputType	movement		= 3;
-	bool			keybinds		= 4;
-	FullscreenType		fullscreen		= 5;
-	string			font_set		= 6;
-	int32			map_width		= 7;
-	int32			map_height		= 8;
-	bool			tactical_hud		= 9;
-	string			render_filters_map	= 10;
-	string			render_filters		= 11;
-	SteamType		steam			= 12;
-	bool			wizard			= 13;
+	bool			ascii			= 1 [(display_name)="ASCII"		];
+	bool			keyboard		= 2 [(display_name)="Keyboard"		];
+	MovementInputType	movement		= 3 [(display_name)="Movement"		];
+	bool			keybinds		= 4 [(display_name)="Keybinds"		];
+	FullscreenType		fullscreen		= 5 [(display_name)="Fullscreen"	];
+	string			font_set		= 6 [(display_name)="Font"		];
+	int32			map_width		= 7 [(display_name)="Map Width"		]; // technically scoresheet combines w*h in a single row named "Map View"
+	int32			map_height		= 8 [(display_name)="Map Height"	];
+	bool			tactical_hud		= 9 [(display_name)="Tactical HUD"	];
+	string			render_filters_map	= 10 [(display_name)="Map Filters"	];
+	string			render_filters		= 11 [(display_name)="Filters"		];
+	SteamType		steam			= 12 [(display_name)="Steam"		];
+	bool			wizard			= 13 [(display_name)="Wizard"		];
 }
 
 //------------------------------------------------------------------
@@ -521,7 +522,7 @@ message Options {
 //------------------------------------------------------------------
 
 message Meta {
-	string run_guid = 1;
+	string run_guid = 1 [(display_name)="Run GUID"];
 }
 
 //------------------------------------------------------------------
@@ -529,9 +530,9 @@ message Meta {
 //------------------------------------------------------------------
 
 message HiddenMeta {
-	string	player_guid	= 1;
-	int32	player_id	= 2;
-	int32	run_id		= 3;
+	string	player_guid	= 1 [(display_name)="Player GUID"];
+	int32	player_id	= 2 [(display_name)="Player ID"]; // legacy
+	int32	run_id		= 3 [(display_name)="Run ID"]; // legacy
 }
 
 //------------------------------------------------------------------
@@ -539,8 +540,8 @@ message HiddenMeta {
 //------------------------------------------------------------------
 
 enum SchematicType {
-	SCHEMATIC_TYPE_ITEM		= 0;
-	SCHEMATIC_TYPE_ROBOT		= 1;
+	SCHEMATIC_TYPE_ITEM		= 0	[(enum_display_name)="Item"		];
+	SCHEMATIC_TYPE_ROBOT		= 1	[(enum_display_name)="Robot"		];
 }
 enum SchematicMethodType {
 	SCHEMATIC_METHOD_FREE		= 0	[(enum_display_name)="Free"		];
@@ -555,24 +556,24 @@ enum SchematicMethodType {
 message Route {
 	message Entry {
 		message DiscoveredExit {
-			MapType	destination		= 1;
-			bool	destination_known	= 3;
-			bool	reached			= 2;
+			MapType	destination		= 1 [(display_name)="Destination" ];
+			bool	destination_known	= 2 [(display_name)="Known"       ];
+			bool	reached			= 3 [(display_name)="Reached"     ];
 		}
 		message HistoryEvent {
-			int32	turn	= 1;
-			string	event	= 2;
+			int32	turn	= 1 [(display_name)="Turn"  ];
+			string	event	= 2 [(display_name)="Event" ];
 		}
 		message ObtainedSchematic {
-			string			name		= 1;
-			SchematicType		type		= 2;
-			SchematicMethodType	method		= 3;
+			string			name		= 1 [(display_name)="Schematic"	];
+			SchematicType		type		= 2 [(display_name)="Type"	];
+			SchematicMethodType	method		= 3 [(display_name)="Method"	];
 		}
 
 		message FabricatedObject {
-			string	name		= 1;
-			int32	count		= 2;
-			bool	preloaded	= 3;
+			string	name		= 1 [(display_name)="Name"	];
+			int32	count		= 2 [(display_name)="Count"	];
+			bool	preloaded	= 3 [(display_name)="Preloaded"	];
 		}
 		Location			location		= 1;
 		repeated DiscoveredExit		discovered_exits	= 2;
