@@ -514,7 +514,6 @@ message Options {
 	string			render_filters_map	= 10 [(display_name)="Map Filters"	];
 	string			render_filters		= 11 [(display_name)="Filters"		];
 	SteamType		steam			= 12 [(display_name)="Steam"		];
-	bool			wizard			= 13 [(display_name)="Wizard"		];
 }
 
 //------------------------------------------------------------------
