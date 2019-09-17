@@ -862,10 +862,11 @@ message Stats {
 
 	message Combat {
 		message DamageTaken {
-			int32 overall             = 1                                                           ;
-			int32 core                = 2 [ (display_name)="Core"                                  ];
-			int32 absorbed_by_shields = 3 [ (display_name)="Absorbed by Shields"                   ];
-			int32 redirected_to_core  = 4 [ (display_name)="Redirected to Core"  ,(skip_zero)=true ];
+			int32 overall               = 1                                                             ;
+			int32 core                  = 2 [ (display_name)="Core"                                    ];
+			int32 absorbed_by_shields   = 3 [ (display_name)="Absorbed by Shields"                     ];
+			int32 reduced_by_siege_mode = 4 [ (display_name)="Reduced by Siege Mode" ,(skip_zero)=true ];
+			int32 redirected_to_core    = 5 [ (display_name)="Redirected to Core"    ,(skip_zero)=true ];
 		}
 
 		message VolleysFired {
@@ -1029,6 +1030,12 @@ message Stats {
 			Effects effects                = 4 [ (display_name)="Effects"                 ];
 		}
 
+		message SiegeActivations {
+			int32 overall            = 1                                                        ;
+			int32 total_turns        = 2 [ (display_name)="Total Turns"      ,(skip_zero)=true ];
+			int32 longest_duration   = 3 [ (display_name)="Longest Duration" ,(skip_zero)=true ];
+		}
+
 		message RobotsCorrupted {
 			int32 overall            = 1                                         ;
 			int32 combat_hostiles    = 2 [ (display_name)="Combat Hostiles"     ];
@@ -1062,14 +1069,15 @@ message Stats {
 		SelfInflictedDamage self_inflicted_damage  = 12 [ (display_name)="Self-Inflicted Damage"  ];
 		TargetsRammed       targets_rammed         = 13 [ (display_name)="Targets Rammed"         ];
 		HighestTemperature  highest_temperature    = 14 [ (display_name)="Highest Temperature"    ];
-		RobotsCorrupted     robots_corrupted       = 15 [ (display_name)="Robots Corrupted"       ];
-		RobotsMelted        robots_melted          = 16 [ (display_name)="Robots Melted"          ];
-		int32               parts_sabotaged        = 17 [ (display_name)="Parts Sabotaged"        ];
-		int32               parts_stolen           = 18 [ (display_name)="Parts Stolen"           ];
-		int32               parts_stripped         = 19 [ (display_name)="Parts Stripped"         ];
-		int32               power_chain_reactions  = 20 [ (display_name)="Power Chain Reactions"  ];
-		int32               missiles_intercepted   = 21 [ (display_name)="Missiles Intercepted"   ];
-		LatentEnergyUsed    latent_energy_used     = 22 [ (display_name)="Latent Energy Used"     ];
+		SiegeActivations    siege_activations      = 15 [ (display_name)="Siege Activations"      ];
+		RobotsCorrupted     robots_corrupted       = 16 [ (display_name)="Robots Corrupted"       ];
+		RobotsMelted        robots_melted          = 17 [ (display_name)="Robots Melted"          ];
+		int32               parts_sabotaged        = 18 [ (display_name)="Parts Sabotaged"        ];
+		int32               parts_stolen           = 19 [ (display_name)="Parts Stolen"           ];
+		int32               parts_stripped         = 20 [ (display_name)="Parts Stripped"         ];
+		int32               power_chain_reactions  = 21 [ (display_name)="Power Chain Reactions"  ];
+		int32               missiles_intercepted   = 22 [ (display_name)="Missiles Intercepted"   ];
+		LatentEnergyUsed    latent_energy_used     = 23 [ (display_name)="Latent Energy Used"     ];
 	}
 
 	message Alert {
