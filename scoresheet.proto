@@ -17,6 +17,35 @@ extend google.protobuf.EnumValueOptions {
 	string enum_display_abbreviation	= 50301; // for column headers, route exits discovered, etc.
 }
 
+//------------------------------------------------------------------
+// Service/Uploading
+//------------------------------------------------------------------
+
+option go_package = "protobuf";
+
+message PingRequest {
+}
+
+message PingResponse {
+    uint64 server_timestamp = 1;
+}
+
+message PostScoresheetRequest {
+    Scoresheet scoresheet = 1;
+    string textual_scoresheet = 2;
+}
+
+message PostScoresheetResponse {
+    // If successful, the URL at which this scoresheet was stored
+    string url = 1;
+    // If unsuccessful, a reason why
+    string error_message = 2;
+}
+
+//------------------------------------------------------------------
+// Scoresheet
+//------------------------------------------------------------------
+
 message Scoresheet {
 	Header			header			= 1;
 	Performance		performance		= 2	[(display_name)="Performance"		];
