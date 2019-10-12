@@ -82,10 +82,11 @@ enum DifficultyType {
 	DIFFICULTY_WIZARD_MODE	= 3	[(enum_display_name)="Wizard"		];
 }
 enum SpecialModeType {
-	SPECIAL_MODE_NONE		= 0	[(enum_display_name)="None"			];
-	SPECIAL_MODE_AFD_LAUNCHERS	= 1	[(enum_display_name)="AFD2018/Launchers"	];
-	SPECIAL_MODE_AFD_PAY2BUY	= 2	[(enum_display_name)="AFD2019/Pay2Buy"		];
-	SPECIAL_MODE_AFD_ARCADE		= 3	[(enum_display_name)="AFD2050/Arcade"		];
+	SPECIAL_MODE_NONE		= 0	[(enum_display_name)="None"				];
+	SPECIAL_MODE_AFD_LAUNCHERS	= 1	[(enum_display_name)="AFD2018/Launchers"		];
+	SPECIAL_MODE_AFD_PAY2BUY	= 2	[(enum_display_name)="AFD2019/Pay2Buy"			];
+	SPECIAL_MODE_AFD_ARCADE		= 3	[(enum_display_name)="AFD2050/Arcade"			];
+	SPECIAL_MODE_ABOMINATIONS	= 4	[(enum_display_name)="Halloween2019/Abominations"	];
 }
 message Header {
 	string		filename	= 1	[(display_name)="Filename"		];
@@ -237,13 +238,14 @@ enum MapType {
 	MAP_SEC = 30	[(enum_display_name)="Section 7"		,(enum_display_abbreviation)="Sec"	];
 	MAP_COM = 31	[(enum_display_name)="Command"			,(enum_display_abbreviation)="Com"	];
 	MAP_AC0 = 32	[(enum_display_name)="Access_0"			,(enum_display_abbreviation)="Ac0"	];
-	MAP_W00 = 33	[(enum_display_name)="To Epsilon Eridani"	,(enum_display_abbreviation)="W00"	]; // wins (abbreviation technically N/A)
-	MAP_W01 = 34	[(enum_display_name)="0b11 Command"		,(enum_display_abbreviation)="W01"	];
-	MAP_W02 = 35	[(enum_display_name)="To Fleet Rendezvous"	,(enum_display_abbreviation)="W02"	];
-	MAP_W03 = 36	[(enum_display_name)="Tau Ceti IV Orbit"	,(enum_display_abbreviation)="W03"	];
-	MAP_W04 = 37	[(enum_display_name)="0b10 Command"		,(enum_display_abbreviation)="W04"	];
-	MAP_W05 = 38	[(enum_display_name)="Subspace"			,(enum_display_abbreviation)="W05"	];
-	MAP_W06 = 39	[(enum_display_name)="Near Former Tau Ceti IV"	,(enum_display_abbreviation)="W06"	];
+	MAP_FIN = 33	[(enum_display_name)="Lair"			,(enum_display_abbreviation)="Lai"	];
+	MAP_W00 = 1000	[(enum_display_name)="To Epsilon Eridani"	,(enum_display_abbreviation)="W00"	]; // wins (abbreviation technically N/A)
+	MAP_W01 = 1001	[(enum_display_name)="0b11 Command"		,(enum_display_abbreviation)="W01"	];
+	MAP_W02 = 1002	[(enum_display_name)="To Fleet Rendezvous"	,(enum_display_abbreviation)="W02"	];
+	MAP_W03 = 1003	[(enum_display_name)="Tau Ceti IV Orbit"	,(enum_display_abbreviation)="W03"	];
+	MAP_W04 = 1004	[(enum_display_name)="0b10 Command"		,(enum_display_abbreviation)="W04"	];
+	MAP_W05 = 1005	[(enum_display_name)="Subspace"			,(enum_display_abbreviation)="W05"	];
+	MAP_W06 = 1006	[(enum_display_name)="Near Former Tau Ceti IV"	,(enum_display_abbreviation)="W06"	];
 }
 enum HeatLevelType {
 	HEAT_COOL	= 0	[(enum_display_name)="Cool"	];
@@ -867,6 +869,8 @@ message Stats {
 			int32 hydra               = 87 [ (display_name)="Hydra"               ,(skip_zero)=true ];
 			int32 borebot             = 88 [ (display_name)="Borebot"             ,(skip_zero)=true ];
 			int32 revision            = 89 [ (display_name)="Revision"            ,(skip_zero)=true ];
+			int32 abomination         = 90 [ (display_name)="Abomination"         ,(skip_zero)=true ];
+			int32 anomaly             = 91 [ (display_name)="Anomaly"             ,(skip_zero)=true ];
 		}
 
 		message BestKillStreak {
