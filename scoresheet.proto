@@ -28,6 +28,7 @@ message PingRequest {
 
 message PingResponse {
     uint64 server_timestamp = 1;
+    bytes request_public_key = 2;
 }
 
 message PostScoresheetRequest {
@@ -553,6 +554,7 @@ message Options {
 
 message Meta {
 	string run_guid = 1 [(display_name)="Run GUID"];
+	bytes player_public_key = 2 [(display_name)="Player public key"];
 }
 
 //------------------------------------------------------------------
