@@ -67,9 +67,8 @@ message Scoresheet {
 	Game			game			= 17	[(display_name)="Game"			];
 	Options			options			= 18	[(display_name)="Options"		];
 	Meta			meta			= 19	[(display_name)="Meta"			];
-	HiddenMeta		hidden_meta		= 20	[(display_name)="Hidden Meta"		];
-	Stats			stats			= 21	[(display_name)="Stats"			];
-	Route			route			= 22	[(display_name)="Route"			];
+	Stats			stats			= 20	[(display_name)="Stats"			];
+	Route			route			= 21	[(display_name)="Route"			];
 }
 
 //------------------------------------------------------------------
@@ -553,18 +552,12 @@ message Options {
 //------------------------------------------------------------------
 
 message Meta {
-	string run_guid = 1 [(display_name)="Run GUID"];
-	bytes player_public_key = 2 [(display_name)="Player public key"];
-}
-
-//------------------------------------------------------------------
-// Hidden Meta
-//------------------------------------------------------------------
-
-message HiddenMeta {
-	string	player_guid	= 1 [(display_name)="Player GUID"];
-	int32	player_id	= 2 [(display_name)="Player ID"]; // legacy
-	int32	run_id		= 3 [(display_name)="Run ID"]; // legacy
+	string	run_guid		= 1 [(display_name)="Run GUID"];
+	bytes	player_public_key	= 2 [(display_name)="Player public key"];
+	// populated from old data/system but unused
+	string	player_guid		= 3 [(display_name)="Player GUID"];
+	int32	player_id		= 4 [(display_name)="Player ID"]; // legacy
+	int32	run_id			= 5 [(display_name)="Run ID"]; // legacy
 }
 
 //------------------------------------------------------------------
