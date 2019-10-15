@@ -204,7 +204,7 @@ message Bonus {
 // Cogmind
 //------------------------------------------------------------------
 
-enum MapType {
+enum MapType { // currently Cogmind scoresheetStats.routeDiscoveredExits parsing assumes this is parallel to internal mapType
 	MAP_NONE = 0;
 	MAP_SAN = 1	[(enum_display_name)="Sandbox"			,(enum_display_abbreviation)="San"	];
 	MAP_SCR = 2	[(enum_display_name)="Scrapyard"		,(enum_display_abbreviation)="Scr"	];
@@ -238,7 +238,7 @@ enum MapType {
 	MAP_SEC = 30	[(enum_display_name)="Section 7"		,(enum_display_abbreviation)="Sec"	];
 	MAP_COM = 31	[(enum_display_name)="Command"			,(enum_display_abbreviation)="Com"	];
 	MAP_AC0 = 32	[(enum_display_name)="Access_0"			,(enum_display_abbreviation)="Ac0"	];
-	MAP_FIN = 33	[(enum_display_name)="Lair"			,(enum_display_abbreviation)="Lai"	];
+	MAP_LAI = 33	[(enum_display_name)="Lair"			,(enum_display_abbreviation)="Lai"	];
 	MAP_W00 = 1000	[(enum_display_name)="To Epsilon Eridani"	,(enum_display_abbreviation)="W00"	]; // wins (abbreviation technically N/A)
 	MAP_W01 = 1001	[(enum_display_name)="0b11 Command"		,(enum_display_abbreviation)="W01"	];
 	MAP_W02 = 1002	[(enum_display_name)="To Fleet Rendezvous"	,(enum_display_abbreviation)="W02"	];
@@ -553,7 +553,7 @@ message Options {
 
 message Meta {
 	string	run_guid		= 1 [(display_name)="Run GUID"];
-	bytes	player_public_key	= 2 [(display_name)="Player public key"];
+	bytes	player_public_key	= 2 [(display_name)="Player Public Key"];
 	// populated from old data/system but unused
 	string	player_guid		= 3 [(display_name)="Player GUID"];
 	int32	player_id		= 4 [(display_name)="Player ID"]; // legacy
@@ -584,6 +584,7 @@ message Route {
 			MapType	destination		= 1 [(display_name)="Destination" ];
 			bool	destination_known	= 2 [(display_name)="Known"       ];
 			bool	reached			= 3 [(display_name)="Reached"     ];
+			int32	count			= 4 [(display_name)="Count"       ];
 		}
 		message HistoryEvent {
 			int32	turn	= 1 [(display_name)="Turn"  ];
