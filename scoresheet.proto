@@ -255,6 +255,15 @@ enum HeatLevelType {
 	HEAT_DANGER	= 4	[(enum_display_name)="Danger"	];
 	HEAT_CRITICAL	= 5	[(enum_display_name)="Critical"	];
 }
+enum MoveModeType {
+	MOVE_TREAD	= 0	[(enum_display_name)="Treading"	];
+	MOVE_LEG	= 1	[(enum_display_name)="Walking"	];
+	MOVE_WHEEL	= 2	[(enum_display_name)="Rolling"	];
+	MOVE_HOVER	= 3	[(enum_display_name)="Hovering"	];
+	MOVE_FLIGHT	= 4	[(enum_display_name)="Flying"	];
+	MOVE_IMMOBILE	= 5	[(enum_display_name)="Immobile"	]; // currently only possible due to siege mode
+	MOVE_CORE	= 6	[(enum_display_name)="Core"	];
+}
 message Location {
 	sint32	depth	= 1; // 0 if N/A (win)
 	MapType	map	= 2;
@@ -268,11 +277,17 @@ message Cogmind {
 		HeatLevelType	heat	= 1;
 		int32		value	= 2;
 	}
+	message Movement {
+		MoveModeType	mode			= 1;
+		int32		speed			= 2;
+		int32		overweight_factor	= 3;
+	}
 	VariableValue	core_integrity		= 1 [(display_name)="Core Integrity"	];
 	VariableValue	matter			= 2 [(display_name)="Matter"		];
 	VariableValue	energy			= 3 [(display_name)="Energy"		];
 	int32		system_corruption	= 4 [(display_name)="System Corruption"	];
 	Temperature	temperature		= 5 [(display_name)="Temperature"	];
+	Movement	movement		= 7 [(display_name)="Movement"		];
 	Location	location		= 6 [(display_name)="Location"		];
 }
 
