@@ -85,7 +85,7 @@ enum SpecialModeType {
 	SPECIAL_MODE_NONE		= 0	[(enum_display_name)="None"				];
 	SPECIAL_MODE_AFD_LAUNCHERS	= 1	[(enum_display_name)="AFD2018/Launchers"		];
 	SPECIAL_MODE_AFD_PAY2BUY	= 2	[(enum_display_name)="AFD2019/Pay2Buy"			];
-	SPECIAL_MODE_AFD_ARCADE		= 3	[(enum_display_name)="AFD2050/Arcade"			];
+	SPECIAL_MODE_AFD_ARCADE		= 3	[(enum_display_name)="AFD2100/Arcade"			];
 	SPECIAL_MODE_ABOMINATIONS	= 4	[(enum_display_name)="Halloween2019/Abominations"	];
 }
 message Header {
