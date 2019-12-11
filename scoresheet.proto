@@ -1794,6 +1794,56 @@ message Stats {
 		Total total = 1 [ (display_name)="Total"  ];
 	}
 
+	message Rpglike {
+		message LevelsRaised {
+			int32 overall    = 1                                ;
+			int32 xp_earned  = 2 [ (display_name)="XP Earned"  ];
+			int32 xp_spent   = 3 [ (display_name)="XP Spent"   ];
+		}
+		message Upgrades {
+			int32 overall    		= 1                              		 ;
+			int32 power_slot  		= 2  [ (display_name)="Power Slot"		];
+			int32 propulsion_slot  		= 3  [ (display_name)="Propulsion Slot"		];
+			int32 utility_slot  		= 4  [ (display_name)="Utility Slot"		];
+			int32 weapon_slot  		= 5  [ (display_name)="Weapon Slot"		];
+			int32 core_integrity  		= 6  [ (display_name)="Core Integrity"		];
+			int32 heat_dissipation  	= 7  [ (display_name)="Heat Dissipation"	];
+			int32 energy_generation  	= 8  [ (display_name)="Energy Generation"	];
+			int32 energy_storage  		= 9  [ (display_name)="Energy Storage"		];
+			int32 matter_storage  		= 10 [ (display_name)="Matter Storage"		];
+			int32 mass_support  		= 11 [ (display_name)="Mass Support"		];
+			int32 inventory_capacity  	= 12 [ (display_name)="Inventory Capacity"	];
+			int32 sight_range  		= 13 [ (display_name)="Sight Range"		];
+			int32 sensor_range  		= 14 [ (display_name)="Sensor Range"		];
+			int32 terrain_scan_density  	= 15 [ (display_name)="Terrain Scan Density"	];
+			int32 ranged_accuracy  		= 16 [ (display_name)="Ranged Accuracy"		];
+			int32 melee_accuracy  		= 17 [ (display_name)="Melee Accuracy"		];
+			int32 hack_attack_percent  	= 18 [ (display_name)="Hack Attack %"		];
+			int32 hack_defense_percent  	= 19 [ (display_name)="Hack Defense %"		];
+			int32 ki_resistance_percent  	= 20 [ (display_name)="KI Resistance %"		];
+			int32 th_resistance_percent  	= 21 [ (display_name)="TH Resistance %"		];
+			int32 ex_resistance_percent  	= 22 [ (display_name)="EX Resistance %"		];
+			int32 ki_damage_percent  	= 23 [ (display_name)="KI Damage %"		];
+			int32 th_damage_percent  	= 24 [ (display_name)="TH Damage %"		];
+			int32 ex_damage_percent  	= 25 [ (display_name)="EX Damage %"		];
+		}
+		message ProtomatterCreated {
+			message IntegrityRestored {
+				int32 overall	= 1				 ;
+				int32 core	= 2 [ (display_name)="Core"	];
+				int32 parts	= 3 [ (display_name)="Parts"	];
+			}
+		
+			int32             overall		= 1						 ;
+			IntegrityRestored integrity_restored 	= 2 [ (display_name)="Integrity Restored"	];
+		}
+		
+		LevelsRaised       levels_raised       = 1 [ (display_name)="Levels Raised"  		];
+		Upgrades           upgrades            = 2 [ (display_name)="Upgrades"       		];
+		ProtomatterCreated protomatter_created = 3 [ (display_name)="Protomatter Created"	];
+		int32              protomatter_decayed = 4 [ (display_name)="Protomatter Decayed"	];
+	}
+
 	Build       build       = 1  [ (display_name)="Build"        ];
 	Resources   resources   = 2  [ (display_name)="Resources"    ];
 	Kills       kills       = 3  [ (display_name)="Kills"        ];
@@ -1808,4 +1858,5 @@ message Stats {
 	Intel       intel       = 12 [ (display_name)="Intel"        ];
 	Exploration exploration = 13 [ (display_name)="Exploration"  ];
 	Actions     actions     = 14 [ (display_name)="Actions"      ];
+	Rpglike     rpglike     = 15 [ (display_name)="RPGLIKE"      ];
 }
