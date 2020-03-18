@@ -83,11 +83,13 @@ enum DifficultyType {
 }
 enum SpecialModeType {
 	SPECIAL_MODE_NONE		= 0	[(enum_display_name)="None"				];
-	SPECIAL_MODE_AFD_LAUNCHERS	= 1	[(enum_display_name)="AFD2018/Launchers"		];
-	SPECIAL_MODE_AFD_PAY2BUY	= 2	[(enum_display_name)="AFD2019/Pay2Buy"			];
-	SPECIAL_MODE_AFD_ARCADE		= 3	[(enum_display_name)="AFD2100/Arcade"			];
+	SPECIAL_MODE_LAUNCHERS		= 1	[(enum_display_name)="AFD2018/Launchers"		];
+	SPECIAL_MODE_PAY2BUY		= 2	[(enum_display_name)="AFD2019/Pay2Buy"			];
+	SPECIAL_MODE_ARCADE		= 3	[(enum_display_name)="Experiment/Arcade"		];
 	SPECIAL_MODE_ABOMINATIONS	= 4	[(enum_display_name)="Halloween2019/Abominations"	];
 	SPECIAL_MODE_RPGLIKE		= 5	[(enum_display_name)="Winter2019/RPGLIKE"		];
+	SPECIAL_MODE_BATTLE_ROYALE	= 6	[(enum_display_name)="Experiment/BattleRoyale"		];
+	SPECIAL_MODE_PLAYER2		= 7	[(enum_display_name)="AFD2020/Player2"			];
 }
 message Header {
 	string		filename	= 1	[(display_name)="Filename"		];
@@ -240,6 +242,7 @@ enum MapType { // currently Cogmind scoresheetStats.routeDiscoveredExits parsing
 	MAP_COM = 31	[(enum_display_name)="Command"			,(enum_display_abbreviation)="Com"	];
 	MAP_AC0 = 32	[(enum_display_name)="Access_0"			,(enum_display_abbreviation)="Ac0"	];
 	MAP_LAI = 33	[(enum_display_name)="Lair"			,(enum_display_abbreviation)="Lai"	];
+	MAP_TOW = 34	[(enum_display_name)="Wartown"			,(enum_display_abbreviation)="Tow"	];
 	MAP_W00 = 1000	[(enum_display_name)="To Epsilon Eridani"	,(enum_display_abbreviation)="W00"	]; // wins (abbreviation technically N/A)
 	MAP_W01 = 1001	[(enum_display_name)="0b11 Command"		,(enum_display_abbreviation)="W01"	];
 	MAP_W02 = 1002	[(enum_display_name)="To Fleet Rendezvous"	,(enum_display_abbreviation)="W02"	];
@@ -883,6 +886,7 @@ message Stats {
 			int32 revision            = 89 [ (display_name)="Revision"            ,(skip_zero)=true ];
 			int32 abomination         = 90 [ (display_name)="Abomination"         ,(skip_zero)=true ];
 			int32 anomaly             = 91 [ (display_name)="Anomaly"             ,(skip_zero)=true ];
+			int32 player              = 92 [ (display_name)="Player"              ,(skip_zero)=true ];
 		}
 
 		message BestKillStreak {
