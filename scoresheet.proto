@@ -1848,6 +1848,41 @@ message Stats {
 		int32              protomatter_decayed = 4 [ (display_name)="Protomatter Decayed"	];
 	}
 
+	message Player2 {		
+		message SlotsEvolved {
+			int32 overall    = 1                                 ;
+			int32 power      = 2 [ (display_name)="Power"       ];
+			int32 propulsion = 3 [ (display_name)="Propulsion"  ];
+			int32 utility    = 4 [ (display_name)="Utility"     ];
+			int32 weapon     = 5 [ (display_name)="Weapon"      ];
+		}
+		message DamageTaken {
+			message CoreDamage {
+				int32 overall		= 1						 ;
+				int32 player2Percentage	= 2 [ (display_name)="Player 2/Cogmind (%)"	];
+			}
+			
+			int32 	    overall              = 1						 ;
+			CoreDamage  core                 = 2 [ (display_name)="Core"			];
+			int32       absorbed_by_shields  = 3 [ (display_name)="Absorbed by Shields"     ];
+		}
+		message DamageInflicted {
+			int32 overall		= 1						 ;
+			int32 player2Percentage	= 2 [ (display_name)="Player 2/Cogmind (%)"	];
+		}
+		message CombatHostilesDestroyed {
+			int32 overall		= 1						 ;
+			int32 player2Percentage	= 2 [ (display_name)="Player 2/Cogmind (%)"	];
+		}
+		
+		SlotsEvolved            slots_evolved              = 1 [ (display_name)="Slots Evolved"             ];
+		int32                   parts_attached             = 2 [ (display_name)="Parts Attached"            ];
+		int32                   parts_lost                 = 3 [ (display_name)="Parts Lost"                ];
+		DamageTaken             damage_taken               = 4 [ (display_name)="Damage Taken"              ];
+		DamageInflicted         damage_inflicted           = 5 [ (display_name)="Damage Inflicted"          ];
+		CombatHostilesDestroyed combat_hostiles_destroyed  = 6 [ (display_name)="Combat Hostiles Destroyed" ];
+	}
+	
 	Build       build       = 1  [ (display_name)="Build"        ];
 	Resources   resources   = 2  [ (display_name)="Resources"    ];
 	Kills       kills       = 3  [ (display_name)="Kills"        ];
@@ -1863,4 +1898,5 @@ message Stats {
 	Exploration exploration = 13 [ (display_name)="Exploration"  ];
 	Actions     actions     = 14 [ (display_name)="Actions"      ];
 	Rpglike     rpglike     = 15 [ (display_name)="RPGLIKE"      ];
+	Player2     player2     = 16 [ (display_name)="Player 2"     ];
 }
