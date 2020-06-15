@@ -1501,8 +1501,14 @@ message Stats {
 		message UsedRifInstaller {
 			int32 overall              = 1                                                             ;
 			int32 coupler_efficiency   = 2  [ (display_name)="Coupler Efficiency"   ,(skip_zero)=true ];
+			int32 hotswap              = 11 [ (display_name)="Hotswap"              ,(skip_zero)=true ];
+			int32 command_fork         = 12 [ (display_name)="Command Fork"         ,(skip_zero)=true ];
+			int32 threat_obfuscation   = 13 [ (display_name)="Threat Obfuscation"   ,(skip_zero)=true ];
+			int32 signal_jamming       = 14 [ (display_name)="Signal Jamming"       ,(skip_zero)=true ];
+			int32 zone_cloak           = 15 [ (display_name)="Zone Cloak"           ,(skip_zero)=true ];
 			int32 robot_detection      = 3  [ (display_name)="Robot Detection"      ,(skip_zero)=true ];
 			int32 patrol_navigation    = 4  [ (display_name)="Patrol Navigation"    ,(skip_zero)=true ];
+			int32 watcher_feeds        = 16 [ (display_name)="Watcher Feeds"        ,(skip_zero)=true ];
 			int32 alert_id_control     = 5  [ (display_name)="Alert ID Control"     ,(skip_zero)=true ];
 			int32 structural_interface = 6  [ (display_name)="Structural Interface" ,(skip_zero)=true ];
 			int32 program_shield       = 7  [ (display_name)="Program Shield"       ,(skip_zero)=true ];
