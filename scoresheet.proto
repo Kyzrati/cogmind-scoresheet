@@ -1770,12 +1770,19 @@ message Stats {
 			int32 aoe        = 4 [ (display_name)="AOE"         ];
 		}
 
+		message TerrainRammed {
+			int32 overall           = 1                                           ;
+			int32 walls_destroyed   = 2 [ (display_name)="Walls Destroyed"       ];
+			int32 machines_disabled = 3 [ (display_name)="Machines Disabled"     ];
+		}
+
 		int32                  turns_passed             = 1 [ (display_name)="Turns Passed"          ];
 		SpacesMoved            spaces_moved             = 2 [ (display_name)="Spaces Moved"          ];
 		ExplorationRatePercent exploration_rate_percent = 3 [ (display_name)="Exploration Rate (%)"  ];
 		int32                  scrap_searched           = 4 [ (display_name)="Scrap Searched"        ];
 		int32                  spaces_dug               = 5 [ (display_name)="Spaces Dug"            ];
 		TerrainDestroyed       terrain_destroyed        = 6 [ (display_name)="Terrain Destroyed"     ];
+		TerrainRammed          terrain_rammed           = 7 [ (display_name)="Terrain Rammed"        ];
 	}
 
 	message Actions {
