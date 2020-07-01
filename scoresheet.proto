@@ -1159,6 +1159,7 @@ message Stats {
 
 		PeakInfluence     peak_influence          = 1 [ (display_name)="Peak Influence"                            ];
 		MaximumAlertLevel maximum_alert_level     = 2 [ (display_name)="Maximum Alert Level"                       ];
+		int32             sterilizations          = 8 [ (display_name)="Sterilizations"          ,(skip_zero)=true ];
 		SquadsDispatched  squads_dispatched       = 3 [ (display_name)="Squads Dispatched"                         ];
 		int32             data_miner_redirects    = 4 [ (display_name)="Data Miner Redirects"    ,(skip_zero)=true ];
 		int32             construction_impeded    = 5 [ (display_name)="Construction Impeded"                      ];
