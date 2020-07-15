@@ -467,6 +467,8 @@ message BestStates {
 	int32 stasis_canceling		= 55	[(display_name)="Stasis Canceling"		,(skip_zero)=true	];
 	int32 offensive_hacking		= 56	[(display_name)="Offensive Hacking"		,(skip_zero)=true	];
 	int32 defensive_hacking		= 57	[(display_name)="Defensive Hacking"		,(skip_zero)=true	];
+	int32 relay_coupler_types	= 58	[(display_name)="Relay Coupler Types"		,(skip_zero)=true	];
+	int32 relay_coupler_value	= 59	[(display_name)="Relay Coupler Value"		,(skip_zero)=true	];
 }
 
 //------------------------------------------------------------------
@@ -1131,8 +1133,9 @@ message Stats {
 
 	message Alert {
 		message PeakInfluence {
-			int32 overall           = 1                                        ;
-			int32 average_influence = 2 [ (display_name)="Average Influence"  ];
+			int32 overall           = 1                             ;
+			int32 initial_influence = 3 [ (display_name)="Initial"  ];
+			int32 average_influence = 2 [ (display_name)="Average"  ];
 		}
 
 		message MaximumAlertLevel {
@@ -1655,7 +1658,7 @@ message Stats {
 		message TotalOrders {
 			int32 overall = 1                                                ;
 			int32 stay    = 2  [ (display_name)="STAY"    ,(skip_zero)=true ];
-			int32 goto    = 3  [ (display_name)="GOTO"    ,(skip_zero)=true ];
+			int32 goto    = 3  [ (display_name)="GOTO"    ,(skip_zero)=true ]; // legacy
 			int32 roam    = 4  [ (display_name)="ROAM"    ,(skip_zero)=true ];
 			int32 follow  = 5  [ (display_name)="FOLLOW"  ,(skip_zero)=true ];
 			int32 guard   = 6  [ (display_name)="GUARD"   ,(skip_zero)=true ];
