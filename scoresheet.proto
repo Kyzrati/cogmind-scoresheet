@@ -44,6 +44,25 @@ message PostScoresheetResponse {
 }
 
 //------------------------------------------------------------------
+// (internal work and testing)
+//------------------------------------------------------------------
+
+message Submission { // so far read-only
+	message CreatedAt {
+		uint64 unix = 1;
+	}
+	message Envelope {
+		string ip		= 1;
+		string address		= 2;
+		string userAgent	= 3;
+	}
+	string		id		= 1;
+	CreatedAt	createdAt	= 2;
+	Envelope	envelope	= 3;
+	Scoresheet	scoresheet	= 4;
+}
+
+//------------------------------------------------------------------
 // Scoresheet
 //------------------------------------------------------------------
 
@@ -127,129 +146,134 @@ message Performance {
 //------------------------------------------------------------------
 
 message Bonus {
-	int32 devolution		= 1	[(display_name)="Devolution"			,(skip_zero)=true	];
-	int32 fragile_parts		= 2	[(display_name)="Fragile Parts"			,(skip_zero)=true	];
-	int32 gauntlet			= 3	[(display_name)="Gauntlet"			,(skip_zero)=true	];
-	int32 inhibited_evolution	= 4	[(display_name)="Inhibited Evolution"		,(skip_zero)=true	];
-	int32 no_salvage		= 5	[(display_name)="No Salvage"			,(skip_zero)=true	];
-	int32 pure_core			= 6	[(display_name)="Pure Core"			,(skip_zero)=true	];
-	int32 scavenger			= 7	[(display_name)="Scavenger"			,(skip_zero)=true	];
-	int32 simple_hacker		= 8	[(display_name)="Simple Hacker"			,(skip_zero)=true	];
-	int32 sticky_parts		= 9	[(display_name)="Sticky Parts"			,(skip_zero)=true	];
-	int32 super_gauntlet		= 10	[(display_name)="Super Gauntlet"		,(skip_zero)=true	];
-	int32 trapped			= 11	[(display_name)="Trapped"			,(skip_zero)=true	];
-	int32 unstable_evolution	= 12	[(display_name)="Unstable Evolution"		,(skip_zero)=true	];
-	int32 pacifist			= 13	[(display_name)="Pacifist"			,(skip_zero)=true	];
-	int32 triggered_high_security	= 14	[(display_name)="Triggered High Security"	,(skip_zero)=true	];
-	int32 triggered_max_security	= 15	[(display_name)="Triggered Max Security"	,(skip_zero)=true	];
-	int32 high_alert_combat_kills	= 16	[(display_name)="High Alert Combat Kills"	,(skip_zero)=true	];
-	int32 follower_combat_kills	= 17	[(display_name)="Follower Combat Kills"		,(skip_zero)=true	];
-	int32 entered_garrisons		= 18	[(display_name)="Entered Garrisons"		,(skip_zero)=true	];
-	int32 used_rif_installer	= 19	[(display_name)="Used RIF Installer"		,(skip_zero)=true	];
-	int32 network_hubs_disabled	= 20	[(display_name)="Network Hubs Disabled"		,(skip_zero)=true	];
-	int32 aligned_with_farcom	= 21	[(display_name)="Aligned with FarCom"		,(skip_zero)=true	];
-	int32 met_data_miner		= 22	[(display_name)="Met Data Miner"		,(skip_zero)=true	];
-	int32 used_data_conduit		= 23	[(display_name)="Used Data Conduit"		,(skip_zero)=true	];
-	int32 met_imprinter		= 24	[(display_name)="Met Imprinter"			,(skip_zero)=true	];
-	int32 was_imprinted		= 25	[(display_name)="Was Imprinted"			,(skip_zero)=true	];
-	int32 destroyed_zimprinter	= 26	[(display_name)="Destroyed Z-Imprinter"		,(skip_zero)=true	];
-	int32 triggered_deep_caves_wall	= 27	[(display_name)="Triggered Deep Caves Wall"	,(skip_zero)=true	];
-	int32 exposed_golem_chamber	= 28	[(display_name)="Exposed GOLEM Chamber"		,(skip_zero)=true	];
-	int32 met_zhirov		= 29	[(display_name)="Met Zhirov"			,(skip_zero)=true	];
-	int32 met_warlord_at_base	= 30	[(display_name)="Met Warlord at Base"		,(skip_zero)=true	];
-	int32 mainc_attacked_warlord	= 31	[(display_name)="MAIN.C Attacked Warlord"	,(skip_zero)=true	];
-	int32 warlord_defense_kill	= 32	[(display_name)="Warlord Defense Kill"		,(skip_zero)=true	];
-	int32 built_enhanced_grunts	= 33	[(display_name)="Built Enhanced Grunts"		,(skip_zero)=true	];
-	int32 a7_reached_mainframe	= 34	[(display_name)="A7 Reached Mainframe"		,(skip_zero)=true	];
-	int32 met_r17_at_cetus		= 35	[(display_name)="Met R17 at Cetus"		,(skip_zero)=true	];
-	int32 read_decrypted_archives	= 36	[(display_name)="Read Decrypted Archives"	,(skip_zero)=true	];
-	int32 found_hidden_lab		= 37	[(display_name)="Found Hidden Lab"		,(skip_zero)=true	];
-	int32 decrypted_a0_command	= 38	[(display_name)="Decrypted A0 Command"		,(skip_zero)=true	];
-	int32 used_core_reset_matrix	= 39	[(display_name)="Used Core Reset Matrix"	,(skip_zero)=true	];
-	int32 hacked_protovariant	= 40	[(display_name)="Hacked Protovariant"		,(skip_zero)=true	];
-	int32 met_r17_at_research	= 41	[(display_name)="Met R17 at Research"		,(skip_zero)=true	];
-	int32 met_warlord_at_research	= 42	[(display_name)="Met Warlord at Research"	,(skip_zero)=true	];
-	int32 hacked_god_mode		= 43	[(display_name)="Hacked God Mode"		,(skip_zero)=true	];
-	int32 scanned_by_researcher	= 44	[(display_name)="Scanned by Researcher"		,(skip_zero)=true	];
-	int32 pursued_by_intercept	= 45	[(display_name)="Pursued by Intercept"		,(skip_zero)=true	];
-	int32 acquired_sgemp		= 46	[(display_name)="Acquired SGEMP"		,(skip_zero)=true	];
-	int32 met_sigix			= 47	[(display_name)="Met Sigix"			,(skip_zero)=true	];
-	int32 detonated_l2_power_cell	= 48	[(display_name)="Detonated L2 Power Cell"	,(skip_zero)=true	];
-	int32 activated_exoskeleton	= 49	[(display_name)="Activated Exoskeleton"		,(skip_zero)=true	];
-	int32 delivered_sgemp		= 50	[(display_name)="Delivered SGEMP"		,(skip_zero)=true	];
-	int32 recovered_sigix_corpse	= 51	[(display_name)="Recovered Sigix Corpse"	,(skip_zero)=true	];
-	int32 escaped_with_sigix	= 52	[(display_name)="Escaped with Sigix"		,(skip_zero)=true	];
-	int32 escaped_with_exosigix	= 53	[(display_name)="Escaped with Exo-Sigix"	,(skip_zero)=true	];
-	int32 destroyed_mainc_guards	= 54	[(display_name)="Destroyed MAIN.C Guards"	,(skip_zero)=true	];
-	int32 met_mainc			= 55	[(display_name)="Met MAIN.C"			,(skip_zero)=true	];
-	int32 hacked_mainc		= 56	[(display_name)="Hacked MAIN.C"			,(skip_zero)=true	];
-	int32 destroyed_mainc_shell	= 57	[(display_name)="Destroyed MAIN.C Shell"	,(skip_zero)=true	];
-	int32 destroyed_mainc		= 58	[(display_name)="Destroyed MAIN.C"		,(skip_zero)=true	];
-	int32 zhirov_destroyed_mainc	= 59	[(display_name)="Zhirov Destroyed MAIN.C"	,(skip_zero)=true	];
-	int32 used_0b10_conduit		= 60	[(display_name)="Used 0b10 Conduit"		,(skip_zero)=true	];
-	int32 met_architect		= 61	[(display_name)="Met Architect"			,(skip_zero)=true	];
-	int32 started_test_138b		= 62	[(display_name)="Started Test 138-B"		,(skip_zero)=true	];
-	int32 started_test_138c		= 63	[(display_name)="Started Test 138-C"		,(skip_zero)=true	];
-	int32 destroyed_a8		= 64	[(display_name)="Destroyed A8"			,(skip_zero)=true	];
-	int32 destroyed_a6		= 65	[(display_name)="Destroyed A6"			,(skip_zero)=true	];
-	int32 destroyed_a5		= 66	[(display_name)="Destroyed A5"			,(skip_zero)=true	];
-	int32 destroyed_a4		= 67	[(display_name)="Destroyed A4"			,(skip_zero)=true	];
-	int32 destroyed_a3		= 68	[(display_name)="Destroyed A3"			,(skip_zero)=true	];
-	int32 destroyed_a2		= 69	[(display_name)="Destroyed A2"			,(skip_zero)=true	];
-	int32 destroyed_architect	= 70	[(display_name)="Destroyed Architect"		,(skip_zero)=true	];
-	int32 win			= 71	[(display_name)="Win"				,(skip_zero)=true	];
-	int32 win_speed			= 72	[(display_name)="Win Speed"			,(skip_zero)=true	];
-	int32 challenge_win		= 73	[(display_name)="Challenge Win"			,(skip_zero)=true	];
-	int32 friendly_fire		= 74	[(display_name)="Friendly Fire"			,(skip_zero)=true	];
+	int32 devolution			= 1	[(display_name)="Devolution"			,(skip_zero)=true	];
+	int32 fragile_parts			= 2	[(display_name)="Fragile Parts"			,(skip_zero)=true	];
+	int32 gauntlet				= 3	[(display_name)="Gauntlet"			,(skip_zero)=true	];
+	int32 inhibited_evolution		= 4	[(display_name)="Inhibited Evolution"		,(skip_zero)=true	];
+	int32 no_salvage			= 5	[(display_name)="No Salvage"			,(skip_zero)=true	];
+	int32 pure_core				= 6	[(display_name)="Pure Core"			,(skip_zero)=true	];
+	int32 scavenger				= 7	[(display_name)="Scavenger"			,(skip_zero)=true	];
+	int32 simple_hacker			= 8	[(display_name)="Simple Hacker"			,(skip_zero)=true	];
+	int32 sticky_parts			= 9	[(display_name)="Sticky Parts"			,(skip_zero)=true	];
+	int32 super_gauntlet			= 10	[(display_name)="Super Gauntlet"		,(skip_zero)=true	];
+	int32 trapped				= 11	[(display_name)="Trapped"			,(skip_zero)=true	];
+	int32 unstable_evolution		= 12	[(display_name)="Unstable Evolution"		,(skip_zero)=true	];
+	int32 pacifist				= 13	[(display_name)="Pacifist"			,(skip_zero)=true	];
+	int32 triggered_high_security		= 14	[(display_name)="Triggered High Security"	,(skip_zero)=true	];
+	int32 triggered_max_security		= 15	[(display_name)="Triggered Max Security"	,(skip_zero)=true	];
+	int32 high_alert_combat_kills		= 16	[(display_name)="High Alert Combat Kills"	,(skip_zero)=true	];
+	int32 follower_combat_kills		= 17	[(display_name)="Follower Combat Kills"		,(skip_zero)=true	];
+	int32 entered_garrisons			= 18	[(display_name)="Entered Garrisons"		,(skip_zero)=true	];
+	int32 used_rif_installer		= 19	[(display_name)="Used RIF Installer"		,(skip_zero)=true	];
+	int32 network_hubs_disabled		= 20	[(display_name)="Network Hubs Disabled"		,(skip_zero)=true	];
+	int32 aligned_with_farcom		= 21	[(display_name)="Aligned with FarCom"		,(skip_zero)=true	];
+	int32 met_data_miner			= 22	[(display_name)="Met Data Miner"		,(skip_zero)=true	];
+	int32 used_data_conduit			= 23	[(display_name)="Used Data Conduit"		,(skip_zero)=true	];
+	int32 met_imprinter			= 24	[(display_name)="Met Imprinter"			,(skip_zero)=true	];
+	int32 was_imprinted			= 25	[(display_name)="Was Imprinted"			,(skip_zero)=true	];
+	int32 destroyed_zimprinter		= 26	[(display_name)="Destroyed Z-Imprinter"		,(skip_zero)=true	];
+	int32 triggered_deep_caves_wall		= 27	[(display_name)="Triggered Deep Caves Wall"	,(skip_zero)=true	];
+	int32 exposed_golem_chamber		= 28	[(display_name)="Exposed GOLEM Chamber"		,(skip_zero)=true	];
+	int32 met_zhirov			= 29	[(display_name)="Met Zhirov"			,(skip_zero)=true	];
+	int32 met_warlord_at_base		= 30	[(display_name)="Met Warlord at Base"		,(skip_zero)=true	];
+	int32 mainc_attacked_warlord		= 31	[(display_name)="MAIN.C Attacked Warlord"	,(skip_zero)=true	];
+	int32 warlord_defense_kill		= 32	[(display_name)="Warlord Defense Kill"		,(skip_zero)=true	];
+	int32 built_enhanced_grunts		= 33	[(display_name)="Built Enhanced Grunts"		,(skip_zero)=true	];
+	int32 a7_reached_mainframe		= 34	[(display_name)="A7 Reached Mainframe"		,(skip_zero)=true	];
+	int32 met_r17_at_cetus			= 35	[(display_name)="Met R17 at Cetus"		,(skip_zero)=true	];
+	int32 read_decrypted_archives		= 36	[(display_name)="Read Decrypted Archives"	,(skip_zero)=true	];
+	int32 found_hidden_lab			= 37	[(display_name)="Found Hidden Lab"		,(skip_zero)=true	];
+	int32 decrypted_a0_command		= 38	[(display_name)="Decrypted A0 Command"		,(skip_zero)=true	];
+	int32 used_core_reset_matrix		= 39	[(display_name)="Used Core Reset Matrix"	,(skip_zero)=true	];
+	int32 hacked_protovariant		= 40	[(display_name)="Hacked Protovariant"		,(skip_zero)=true	];
+	int32 met_r17_at_research		= 41	[(display_name)="Met R17 at Research"		,(skip_zero)=true	];
+	int32 met_warlord_at_research		= 42	[(display_name)="Met Warlord at Research"	,(skip_zero)=true	];
+	int32 invited_to_help_at_command	= 75	[(display_name)="Invited to Help at Command"	,(skip_zero)=true	];
+	int32 hacked_god_mode			= 43	[(display_name)="Hacked God Mode"		,(skip_zero)=true	];
+	int32 scanned_by_researcher		= 44	[(display_name)="Scanned by Researcher"		,(skip_zero)=true	];
+	int32 pursued_by_intercept		= 45	[(display_name)="Pursued by Intercept"		,(skip_zero)=true	];
+	int32 acquired_sgemp			= 46	[(display_name)="Acquired SGEMP"		,(skip_zero)=true	];
+	int32 met_sigix				= 47	[(display_name)="Met Sigix"			,(skip_zero)=true	];
+	int32 detonated_l2_power_cell		= 48	[(display_name)="Detonated L2 Power Cell"	,(skip_zero)=true	];
+	int32 activated_exoskeleton		= 49	[(display_name)="Activated Exoskeleton"		,(skip_zero)=true	];
+	int32 delivered_sgemp			= 50	[(display_name)="Delivered SGEMP"		,(skip_zero)=true	];
+	int32 recovered_sigix_corpse		= 51	[(display_name)="Recovered Sigix Corpse"	,(skip_zero)=true	];
+	int32 escaped_with_sigix		= 52	[(display_name)="Escaped with Sigix"		,(skip_zero)=true	];
+	int32 escaped_with_exosigix		= 53	[(display_name)="Escaped with Exo-Sigix"	,(skip_zero)=true	];
+	int32 destroyed_mainc_guards		= 54	[(display_name)="Destroyed MAIN.C Guards"	,(skip_zero)=true	];
+	int32 met_mainc				= 55	[(display_name)="Met MAIN.C"			,(skip_zero)=true	];
+	int32 hacked_mainc			= 56	[(display_name)="Hacked MAIN.C"			,(skip_zero)=true	];
+	int32 destroyed_mainc_shell		= 57	[(display_name)="Destroyed MAIN.C Shell"	,(skip_zero)=true	];
+	int32 destroyed_mainc			= 58	[(display_name)="Destroyed MAIN.C"		,(skip_zero)=true	];
+	int32 zhirov_destroyed_mainc		= 59	[(display_name)="Zhirov Destroyed MAIN.C"	,(skip_zero)=true	];
+	int32 used_0b10_conduit			= 60	[(display_name)="Used 0b10 Conduit"		,(skip_zero)=true	];
+	int32 met_warlord_at_command		= 76	[(display_name)="Met Warlord at Command"	,(skip_zero)=true	];
+	int32 met_architect			= 61	[(display_name)="Met Architect"			,(skip_zero)=true	];
+	int32 started_test_138b			= 62	[(display_name)="Started Test 138-B"		,(skip_zero)=true	];
+	int32 started_test_138c			= 63	[(display_name)="Started Test 138-C"		,(skip_zero)=true	];
+	int32 destroyed_a8			= 64	[(display_name)="Destroyed A8"			,(skip_zero)=true	];
+	int32 destroyed_a6			= 65	[(display_name)="Destroyed A6"			,(skip_zero)=true	];
+	int32 destroyed_a5			= 66	[(display_name)="Destroyed A5"			,(skip_zero)=true	];
+	int32 destroyed_a4			= 67	[(display_name)="Destroyed A4"			,(skip_zero)=true	];
+	int32 destroyed_a3			= 68	[(display_name)="Destroyed A3"			,(skip_zero)=true	];
+	int32 destroyed_a2			= 69	[(display_name)="Destroyed A2"			,(skip_zero)=true	];
+	int32 destroyed_architect		= 70	[(display_name)="Destroyed Architect"		,(skip_zero)=true	];
+	int32 win				= 71	[(display_name)="Win"				,(skip_zero)=true	];
+	int32 win_speed				= 72	[(display_name)="Win Speed"			,(skip_zero)=true	];
+	int32 challenge_win			= 73	[(display_name)="Challenge Win"			,(skip_zero)=true	];
+	int32 friendly_fire			= 74	[(display_name)="Friendly Fire"			,(skip_zero)=true	];
+	//next = 77
 }
 
 //------------------------------------------------------------------
 // Cogmind
 //------------------------------------------------------------------
 
-enum MapType { // currently Cogmind scoresheetStats.routeDiscoveredExits parsing assumes this is parallel to internal mapType
+enum MapType {
 	MAP_NONE = 0;
-	MAP_SAN = 1	[(enum_display_name)="Sandbox"			,(enum_display_abbreviation)="San"	];
-	MAP_SCR = 2	[(enum_display_name)="Scrapyard"		,(enum_display_abbreviation)="Scr"	];
-	MAP_MAT = 3	[(enum_display_name)="Materials"		,(enum_display_abbreviation)="Mat"	];
-	MAP_FAC = 4	[(enum_display_name)="Factory"			,(enum_display_abbreviation)="Fac"	];
-	MAP_RES = 5	[(enum_display_name)="Research"			,(enum_display_abbreviation)="Res"	];
-	MAP_ACC = 6	[(enum_display_name)="Access"			,(enum_display_abbreviation)="Acc"	];
-	MAP_SUR = 7	[(enum_display_name)="Surface"			,(enum_display_abbreviation)="Sur"	];
-	MAP_MIN = 8	[(enum_display_name)="Mines"			,(enum_display_abbreviation)="Min"	];
-	MAP_EXI = 9	[(enum_display_name)="Exiles"			,(enum_display_abbreviation)="Exi"	];
-	MAP_STO = 10	[(enum_display_name)="Storage"			,(enum_display_abbreviation)="Sto"	];
-	MAP_REC = 11	[(enum_display_name)="Recycling"		,(enum_display_abbreviation)="Rec"	];
-	MAP_WAS = 12	[(enum_display_name)="Waste"			,(enum_display_abbreviation)="Was"	];
-	MAP_GAR = 13	[(enum_display_name)="Garrison"			,(enum_display_abbreviation)="Gar"	];
-	MAP_LOW = 14	[(enum_display_name)="Lower Caves"		,(enum_display_abbreviation)="Low"	];
-	MAP_UPP = 15	[(enum_display_name)="Upper Caves"		,(enum_display_abbreviation)="Upp"	];
-	MAP_PRO = 16	[(enum_display_name)="Proximity Caves"		,(enum_display_abbreviation)="Pro"	];
-	MAP_DEE = 17	[(enum_display_name)="Deep Caves"		,(enum_display_abbreviation)="Dee"	];
-	MAP_ZIO = 18	[(enum_display_name)="Zion"			,(enum_display_abbreviation)="Zio"	];
-	MAP_DAT = 19	[(enum_display_name)="Data Miner"		,(enum_display_abbreviation)="Dat"	];
-	MAP_ZHI = 20	[(enum_display_name)="Zhirov"			,(enum_display_abbreviation)="Zhi"	];
-	MAP_WAR = 21	[(enum_display_name)="Warlord"			,(enum_display_abbreviation)="War"	];
-	MAP_EXT = 22	[(enum_display_name)="Extension"		,(enum_display_abbreviation)="Ext"	];
-	MAP_CET = 23	[(enum_display_name)="Cetus"			,(enum_display_abbreviation)="Cet"	];
-	MAP_ARC = 24	[(enum_display_name)="Archives"			,(enum_display_abbreviation)="Arc"	];
-	MAP_HUB = 25	[(enum_display_name)="Hub_04(d)"		,(enum_display_abbreviation)="Hub"	];
-	MAP_ARM = 26	[(enum_display_name)="Armory"			,(enum_display_abbreviation)="Arm"	];
-	MAP_LAB = 27	[(enum_display_name)="Lab"			,(enum_display_abbreviation)="Lab"	];
-	MAP_QUA = 28	[(enum_display_name)="Quarantine"		,(enum_display_abbreviation)="Qua"	];
-	MAP_TES = 29	[(enum_display_name)="Testing"			,(enum_display_abbreviation)="Tes"	];
-	MAP_SEC = 30	[(enum_display_name)="Section 7"		,(enum_display_abbreviation)="Sec"	];
-	MAP_COM = 31	[(enum_display_name)="Command"			,(enum_display_abbreviation)="Com"	];
-	MAP_AC0 = 32	[(enum_display_name)="Access_0"			,(enum_display_abbreviation)="Ac0"	];
-	MAP_LAI = 33	[(enum_display_name)="Lair"			,(enum_display_abbreviation)="Lai"	];
-	MAP_TOW = 34	[(enum_display_name)="Wartown"			,(enum_display_abbreviation)="Tow"	];
-	MAP_W00 = 1000	[(enum_display_name)="To Epsilon Eridani"	,(enum_display_abbreviation)="W00"	]; // wins (abbreviation technically N/A)
-	MAP_W01 = 1001	[(enum_display_name)="0b11 Command"		,(enum_display_abbreviation)="W01"	];
-	MAP_W02 = 1002	[(enum_display_name)="To Fleet Rendezvous"	,(enum_display_abbreviation)="W02"	];
-	MAP_W03 = 1003	[(enum_display_name)="Tau Ceti IV Orbit"	,(enum_display_abbreviation)="W03"	];
-	MAP_W04 = 1004	[(enum_display_name)="0b10 Command"		,(enum_display_abbreviation)="W04"	];
-	MAP_W05 = 1005	[(enum_display_name)="Subspace"			,(enum_display_abbreviation)="W05"	];
-	MAP_W06 = 1006	[(enum_display_name)="Near Former Tau Ceti IV"	,(enum_display_abbreviation)="W06"	];
+	MAP_SAN = 1	[(enum_display_name)="Sandbox"				,(enum_display_abbreviation)="San"	];
+	MAP_SCR = 2	[(enum_display_name)="Scrapyard"			,(enum_display_abbreviation)="Scr"	];
+	MAP_MAT = 3	[(enum_display_name)="Materials"			,(enum_display_abbreviation)="Mat"	];
+	MAP_FAC = 4	[(enum_display_name)="Factory"				,(enum_display_abbreviation)="Fac"	];
+	MAP_RES = 5	[(enum_display_name)="Research"				,(enum_display_abbreviation)="Res"	];
+	MAP_ACC = 6	[(enum_display_name)="Access"				,(enum_display_abbreviation)="Acc"	];
+	MAP_SUR = 7	[(enum_display_name)="Surface"				,(enum_display_abbreviation)="Sur"	];
+	MAP_MIN = 8	[(enum_display_name)="Mines"				,(enum_display_abbreviation)="Min"	];
+	MAP_EXI = 9	[(enum_display_name)="Exiles"				,(enum_display_abbreviation)="Exi"	];
+	MAP_STO = 10	[(enum_display_name)="Storage"				,(enum_display_abbreviation)="Sto"	];
+	MAP_REC = 11	[(enum_display_name)="Recycling"			,(enum_display_abbreviation)="Rec"	];
+	MAP_WAS = 12	[(enum_display_name)="Waste"				,(enum_display_abbreviation)="Was"	];
+	MAP_GAR = 13	[(enum_display_name)="Garrison"				,(enum_display_abbreviation)="Gar"	];
+	MAP_LOW = 14	[(enum_display_name)="Lower Caves"			,(enum_display_abbreviation)="Low"	];
+	MAP_UPP = 15	[(enum_display_name)="Upper Caves"			,(enum_display_abbreviation)="Upp"	];
+	MAP_PRO = 16	[(enum_display_name)="Proximity Caves"			,(enum_display_abbreviation)="Pro"	];
+	MAP_DEE = 17	[(enum_display_name)="Deep Caves"			,(enum_display_abbreviation)="Dee"	];
+	MAP_ZIO = 18	[(enum_display_name)="Zion"				,(enum_display_abbreviation)="Zio"	];
+	MAP_DAT = 19	[(enum_display_name)="Data Miner"			,(enum_display_abbreviation)="Dat"	];
+	MAP_ZHI = 20	[(enum_display_name)="Zhirov"				,(enum_display_abbreviation)="Zhi"	];
+	MAP_WAR = 21	[(enum_display_name)="Warlord"				,(enum_display_abbreviation)="War"	];
+	MAP_EXT = 22	[(enum_display_name)="Extension"			,(enum_display_abbreviation)="Ext"	];
+	MAP_CET = 23	[(enum_display_name)="Cetus"				,(enum_display_abbreviation)="Cet"	];
+	MAP_ARC = 24	[(enum_display_name)="Archives"				,(enum_display_abbreviation)="Arc"	];
+	MAP_HUB = 25	[(enum_display_name)="Hub_04(d)"			,(enum_display_abbreviation)="Hub"	];
+	MAP_ARM = 26	[(enum_display_name)="Armory"				,(enum_display_abbreviation)="Arm"	];
+	MAP_LAB = 27	[(enum_display_name)="Lab"				,(enum_display_abbreviation)="Lab"	];
+	MAP_QUA = 28	[(enum_display_name)="Quarantine"			,(enum_display_abbreviation)="Qua"	];
+	MAP_TES = 29	[(enum_display_name)="Testing"				,(enum_display_abbreviation)="Tes"	];
+	MAP_SEC = 30	[(enum_display_name)="Section 7"			,(enum_display_abbreviation)="Sec"	];
+	MAP_COM = 31	[(enum_display_name)="Command"				,(enum_display_abbreviation)="Com"	];
+	MAP_AC0 = 32	[(enum_display_name)="Access_0"				,(enum_display_abbreviation)="Ac0"	];
+	MAP_LAI = 33	[(enum_display_name)="Lair"				,(enum_display_abbreviation)="Lai"	];
+	MAP_TOW = 34	[(enum_display_name)="Wartown"				,(enum_display_abbreviation)="Tow"	];
+	MAP_W00 = 1000	[(enum_display_name)="To Epsilon Eridani"		,(enum_display_abbreviation)="W00"	]; // wins (abbreviation technically N/A) (Cogmind LeaderboardSubmission expects that these start at 1000)
+	MAP_W01 = 1001	[(enum_display_name)="0b11 Command"			,(enum_display_abbreviation)="W01"	];
+	MAP_W02 = 1002	[(enum_display_name)="To Fleet Rendezvous"		,(enum_display_abbreviation)="W02"	];
+	MAP_W03 = 1003	[(enum_display_name)="Tau Ceti IV Orbit"		,(enum_display_abbreviation)="W03"	];
+	MAP_W04 = 1004	[(enum_display_name)="0b10 Command"			,(enum_display_abbreviation)="W04"	];
+	MAP_W05 = 1005	[(enum_display_name)="Subspace"				,(enum_display_abbreviation)="W05"	];
+	MAP_W06 = 1006	[(enum_display_name)="Near Former Tau Ceti IV"		,(enum_display_abbreviation)="W06"	];
+	MAP_W07 = 1007	[(enum_display_name)="Free Derelict Territories"	,(enum_display_abbreviation)="W07"	];
+	MAP_W08 = 1008	[(enum_display_name)="By MAIN.C's Side"			,(enum_display_abbreviation)="W08"	];
 }
 enum HeatLevelType {
 	HEAT_COOL	= 0	[(enum_display_name)="Cool"	];
@@ -833,6 +857,7 @@ message Stats {
 			int32 enhanced_sentry     = 34 [ (display_name)="Enhanced Sentry"     ,(skip_zero)=true ];
 			int32 enhanced_hunter     = 35 [ (display_name)="Enhanced Hunter"     ,(skip_zero)=true ];
 			int32 enhanced_programmer = 36 [ (display_name)="Enhanced Programmer" ,(skip_zero)=true ];
+			int32 enhanced_qseries    = 93 [ (display_name)="Enhanced Q-Series"   ,(skip_zero)=true ];
 			int32 lightning           = 37 [ (display_name)="Lightning"           ,(skip_zero)=true ];
 			int32 tracker             = 38 [ (display_name)="Tracker"             ,(skip_zero)=true ];
 			int32 combat_programmer   = 39 [ (display_name)="Combat Programmer"   ,(skip_zero)=true ];
@@ -889,6 +914,7 @@ message Stats {
 			int32 abomination         = 90 [ (display_name)="Abomination"         ,(skip_zero)=true ];
 			int32 anomaly             = 91 [ (display_name)="Anomaly"             ,(skip_zero)=true ];
 			int32 player              = 92 [ (display_name)="Player"              ,(skip_zero)=true ];
+			//next = 94
 		}
 
 		message BestKillStreak {
