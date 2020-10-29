@@ -109,6 +109,7 @@ enum SpecialModeType {
 	SPECIAL_MODE_RPGLIKE		= 5	[(enum_display_name)="Winter2019/RPGLIKE"		];
 	SPECIAL_MODE_BATTLE_ROYALE	= 6	[(enum_display_name)="Experiment/BattleRoyale"		];
 	SPECIAL_MODE_PLAYER2		= 7	[(enum_display_name)="AFD2020/Player2"			];
+	SPECIAL_MODE_FORBIDDEN_LORE	= 8	[(enum_display_name)="Halloween2020/ForbiddenLore"	];
 }
 message Header {
 	string		filename	= 1	[(display_name)="Filename"		];
@@ -855,6 +856,7 @@ message Stats {
 			int32 m_guard             = 32 [ (display_name)="M Guard"             ,(skip_zero)=true ];
 			int32 enhanced_grunt      = 33 [ (display_name)="Enhanced Grunt"      ,(skip_zero)=true ];
 			int32 enhanced_sentry     = 34 [ (display_name)="Enhanced Sentry"     ,(skip_zero)=true ];
+			int32 enhanced_demolisher = 94 [ (display_name)="Enhanced Demolisher" ,(skip_zero)=true ];
 			int32 enhanced_hunter     = 35 [ (display_name)="Enhanced Hunter"     ,(skip_zero)=true ];
 			int32 enhanced_programmer = 36 [ (display_name)="Enhanced Programmer" ,(skip_zero)=true ];
 			int32 enhanced_qseries    = 93 [ (display_name)="Enhanced Q-Series"   ,(skip_zero)=true ];
@@ -914,7 +916,7 @@ message Stats {
 			int32 abomination         = 90 [ (display_name)="Abomination"         ,(skip_zero)=true ];
 			int32 anomaly             = 91 [ (display_name)="Anomaly"             ,(skip_zero)=true ];
 			int32 player              = 92 [ (display_name)="Player"              ,(skip_zero)=true ];
-			//next = 94
+			//next = 95
 		}
 
 		message BestKillStreak {
@@ -1813,6 +1815,7 @@ message Stats {
 		int32                  spaces_dug               = 5 [ (display_name)="Spaces Dug"            ];
 		TerrainDestroyed       terrain_destroyed        = 6 [ (display_name)="Terrain Destroyed"     ];
 		TerrainRammed          terrain_rammed           = 7 [ (display_name)="Terrain Rammed"        ];
+		int32                  doors_sealed             = 8 [ (display_name)="Doors Sealed"          ];
 	}
 
 	message Actions {
