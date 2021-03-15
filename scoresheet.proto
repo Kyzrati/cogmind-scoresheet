@@ -713,18 +713,12 @@ message Stats {
 				int32 special_melee_weapon = 11 [ (display_name)="Special Melee Weapon"  ];
 			}
 
-			message CorruptedParts {
-				int32 overall           = 1                                        ;
-				int32 system_corruption = 2 [ (display_name)="System Corruption"  ];
-			}
-
-			int32          overall                 = 1                                              ;
-			Power          power                   = 2 [ (display_name)="Power"                    ];
-			Propulsion     propulsion              = 3 [ (display_name)="Propulsion"               ];
-			Utility        utility                 = 4 [ (display_name)="Utility"                  ];
-			Weapon         weapon                  = 5 [ (display_name)="Weapon"                   ];
-			int32          unidentified_prototypes = 6 [ (display_name)="Unidentified Prototypes"  ];
-			CorruptedParts corrupted_parts         = 7 [ (display_name)="Corrupted Parts"          ];
+			int32      overall                 = 1                                              ;
+			Power      power                   = 2 [ (display_name)="Power"                    ];
+			Propulsion propulsion              = 3 [ (display_name)="Propulsion"               ];
+			Utility    utility                 = 4 [ (display_name)="Utility"                  ];
+			Weapon     weapon                  = 5 [ (display_name)="Weapon"                   ];
+			int32      unidentified_prototypes = 6 [ (display_name)="Unidentified Prototypes"  ];
 		}
 
 		message PartsLost {
@@ -765,10 +759,10 @@ message Stats {
 		}
 
 		message HeaviestBuild {
-			int32 overall             = 1                                              ;
-			int32 greatest_support    = 2 [ (display_name)="Greatest Support"         ];
-			int32 greatest_overweight = 3 [ (display_name)="Greatest Overweight"      ];
-			int32 average_overweight  = 4 [ (display_name)="Average Overweight"       ];
+			int32 overall                   = 1                                              ;
+			int32 greatest_support          = 2 [ (display_name)="Greatest Support"         ];
+			int32 greatest_overweight_times = 3 [ (display_name)="Greatest Overweight (x)"  ];
+			int32 average_overweight_times  = 4 [ (display_name)="Average Overweight (x)"   ];
 		}
 
 		message LargestInventoryCapacity {
@@ -1785,8 +1779,6 @@ message Stats {
 			int32 robots_hopped       = 13 [ (display_name)="Robots Hopped"                         ];
 			int32 cave_ins_triggered  = 14 [ (display_name)="Cave-ins Triggered"                    ];
 			int32 teleports           = 15 [ (display_name)="Teleports"           ,(skip_zero)=true ];
-			int32 spacefolds          = 17 [ (display_name)="Spacefolds"          ,(skip_zero)=true ];
-			int32 microwarps          = 18 [ (display_name)="Microwarps"          ,(skip_zero)=true ];
 			int32 time_travels        = 16 [ (display_name)="Time Travels"        ,(skip_zero)=true ];
 		}
 
@@ -1954,40 +1946,3 @@ message Stats {
 	Rpglike     rpglike     = 15 [ (display_name)="RPGLIKE"      ];
 	Player2     player2     = 16 [ (display_name)="Player 2"     ];
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
