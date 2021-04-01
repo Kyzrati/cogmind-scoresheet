@@ -110,6 +110,7 @@ enum SpecialModeType {
 	SPECIAL_MODE_BATTLE_ROYALE	= 6	[(enum_display_name)="Experiment/BattleRoyale"		];
 	SPECIAL_MODE_PLAYER2		= 7	[(enum_display_name)="AFD2020/Player2"			];
 	SPECIAL_MODE_FORBIDDEN_LORE	= 8	[(enum_display_name)="Halloween2020/ForbiddenLore"	];
+	SPECIAL_MODE_VOLATILE		= 9	[(enum_display_name)="AFD2021/Volatile"			];
 }
 message Header {
 	string		filename	= 1	[(display_name)="Filename"		];
