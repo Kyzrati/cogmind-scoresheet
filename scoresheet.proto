@@ -1,5 +1,5 @@
 
-// Cogmind - Beta 11 (build 220317a)
+// Cogmind - Beta 11.1 (build 220513b)
 
 syntax = "proto3";
 
@@ -184,7 +184,7 @@ message Bonus {
 	int32 met_zhirov			= 29	[(display_name)="Met Zhirov"			,(skip_zero)=true	];
 	int32 met_warlord_at_base		= 30	[(display_name)="Met Warlord at Base"		,(skip_zero)=true	];
 	int32 mainc_attacked_warlord		= 31	[(display_name)="MAIN.C Attacked Warlord"	,(skip_zero)=true	];
-	int32 warlord_defense_kill		= 32	[(display_name)="Warlord Defense Kill"		,(skip_zero)=true	];
+	int32 warlord_defense_kills		= 32	[(display_name)="Warlord Defense Kills"		,(skip_zero)=true	];
 	int32 built_enhanced_grunts		= 33	[(display_name)="Built Enhanced Grunts"		,(skip_zero)=true	];
 	int32 a7_reached_mainframe		= 34	[(display_name)="A7 Reached Mainframe"		,(skip_zero)=true	];
 	int32 met_r17_at_cetus			= 35	[(display_name)="Met R17 at Cetus"		,(skip_zero)=true	];
@@ -943,7 +943,7 @@ message Stats {
 			int32 abomination         = 90 [ (display_name)="Abomination"         ,(skip_zero)=true ];
 			int32 anomaly             = 91 [ (display_name)="Anomaly"             ,(skip_zero)=true ];
 			int32 player              = 92 [ (display_name)="Player"              ,(skip_zero)=true ];
-			//next = 100
+			// next = 100
 		}
 
 		message BestKillStreak {
