@@ -1,5 +1,5 @@
 
-// Cogmind - Beta 11.1 (build 220513b)
+// Cogmind - Beta 11.2 (build 221224c)
 
 syntax = "proto3";
 
@@ -70,27 +70,28 @@ message Submission { // so far read-only
 //------------------------------------------------------------------
 
 message Scoresheet {
-	Header			header			= 1;
-	Performance		performance		= 2	[(display_name)="Performance"		];
-	Bonus			bonus			= 3	[(display_name)="Bonus"			];
-	Cogmind			cogmind			= 4	[(display_name)="Cogmind"		];
-	Parts			parts			= 5	[(display_name)="Parts"			];
-	PeakState		peak_state		= 6	[(display_name)="PeakState"		];
-	Favorites		favorites		= 7	[(display_name)="Favorites"		];
-	ClassDistribution	class_distribution	= 8	[(display_name)="Class Distribution"	];
-	HistoryEventWin		history_event_win	= 9; // for a win, this stores info for the last line of the History section (since there is no corresponding Route map, it's simply shown as "***"), otherwise N/A
-	LastMessages		last_messages		= 10	[(display_name)="Last Messages"		];
-	Map			map			= 11	[(display_name)="Map"			];
-	BestStates		best_states		= 12	[(display_name)="Best States"		];
-	AlienTechUsed		alien_tech_used		= 13	[(display_name)="Alien Tech Used"	];
-	Achievements		achievements		= 14	[(display_name)="Achieveemnts"		];
-	Challenges		challenges		= 15	[(display_name)="Challenges"		];
-	CogshopPurchases	cogshop_purchases	= 16	[(display_name)="Cogshop Purchases"	];
-	Game			game			= 17	[(display_name)="Game"			];
-	Options			options			= 18	[(display_name)="Options"		];
-	Meta			meta			= 19	[(display_name)="Meta"			];
-	Stats			stats			= 20	[(display_name)="Stats"			];
-	Route			route			= 21	[(display_name)="Route"			];
+	Header				header				= 1;
+	Performance			performance			= 2	[(display_name)="Performance"				];
+	Bonus				bonus				= 3	[(display_name)="Bonus"					];
+	Cogmind				cogmind				= 4	[(display_name)="Cogmind"				];
+	Parts				parts				= 5	[(display_name)="Parts"					];
+	PeakState			peak_state			= 6	[(display_name)="PeakState"				];
+	Favorites			favorites			= 7	[(display_name)="Favorites"				];
+	ClassDistribution		class_distribution		= 8	[(display_name)="Class Distribution"			];
+	HistoryEventWin			history_event_win		= 9; // for a win, this stores info for the last line of the History section (since there is no corresponding Route map, it's simply shown as "***"), otherwise N/A
+	LastMessages			last_messages			= 10	[(display_name)="Last Messages"				];
+	Map				map				= 11	[(display_name)="Map"					];
+	BestStates			best_states			= 12	[(display_name)="Best States"				];
+	AlienTechUsed			alien_tech_used			= 13	[(display_name)="Alien Tech Used"			];
+	Achievements			achievements			= 14	[(display_name)="Achieveemnts"				];
+	Challenges			challenges			= 15	[(display_name)="Challenges"				];
+	CogshopPurchases		cogshop_purchases		= 16	[(display_name)="Cogshop Purchases"			];
+	PolymindHostKillLeaderboard	polymind_host_kill_leaderboard	= 22	[(display_name)="Polymind Host Kill Leaderboard"	];
+	Game				game				= 17	[(display_name)="Game"					];
+	Options				options				= 18	[(display_name)="Options"				];
+	Meta				meta				= 19	[(display_name)="Meta"					];
+	Stats				stats				= 20	[(display_name)="Stats"					];
+	Route				route				= 21	[(display_name)="Route"					];
 }
 
 //------------------------------------------------------------------
@@ -115,6 +116,7 @@ enum SpecialModeType {
 	SPECIAL_MODE_FORBIDDEN_LORE	= 8	[(enum_display_name)="Halloween2020/ForbiddenLore"	];
 	SPECIAL_MODE_VOLATILE		= 9	[(enum_display_name)="AFD2021/Volatile"			];
 	SPECIAL_MODE_SAULER		= 10	[(enum_display_name)="Winter2021/Sauler"		];
+	SPECIAL_MODE_POLYMIND		= 11	[(enum_display_name)="Winter2022/Polymind"		];
 }
 message Header {
 	string		filename	= 1	[(display_name)="Filename"		];
@@ -164,6 +166,7 @@ message Bonus {
 	int32 super_gauntlet			= 10	[(display_name)="Super Gauntlet"		,(skip_zero)=true	];
 	int32 trapped				= 11	[(display_name)="Trapped"			,(skip_zero)=true	];
 	int32 unstable_evolution		= 12	[(display_name)="Unstable Evolution"		,(skip_zero)=true	];
+	int32 polymind_skill			= 79	[(display_name)="Polymind Skill"		,(skip_zero)=true	];
 	int32 pacifist				= 13	[(display_name)="Pacifist"			,(skip_zero)=true	];
 	int32 triggered_high_security		= 14	[(display_name)="Triggered High Security"	,(skip_zero)=true	];
 	int32 triggered_max_security		= 15	[(display_name)="Triggered Max Security"	,(skip_zero)=true	];
@@ -230,7 +233,7 @@ message Bonus {
 	int32 win_speed				= 72	[(display_name)="Win Speed"			,(skip_zero)=true	];
 	int32 challenge_win			= 73	[(display_name)="Challenge Win"			,(skip_zero)=true	];
 	int32 friendly_fire			= 74	[(display_name)="Friendly Fire"			,(skip_zero)=true	];
-	//next = 79
+	//next = 80
 }
 
 //------------------------------------------------------------------
@@ -543,6 +546,19 @@ message CogshopPurchases {
 		int32	cost = 2 [(display_name)="Cost"];
 	}
 	repeated Purchase purchases = 1;
+}
+
+//------------------------------------------------------------------
+// Polymind Host Kill Leaderboard (SPECIAL_MODE_POLYMIND)
+//------------------------------------------------------------------
+
+message PolymindHostKillLeaderboard {
+	message HostRecord {
+		string		name		= 1 [(display_name)="Name"		];
+		Location	location	= 2 [(display_name)="Origin"		];
+		int32		kills		= 3 [(display_name)="Kills"		];
+	}
+	repeated HostRecord host_records = 1;
 }
 
 //------------------------------------------------------------------
@@ -2001,6 +2017,31 @@ message Stats {
 		DamageInflicted         damage_inflicted           = 5 [ (display_name)="Damage Inflicted"          ];
 		CombatHostilesDestroyed combat_hostiles_destroyed  = 6 [ (display_name)="Combat Hostiles Destroyed" ];
 	}
+
+	message Polymind {
+		message Hosts {
+			int32 overall          = 1					 ;
+			int32 combat_hostiles  = 2 [ (display_name)="Combat Hostiles"	];
+			int32 allies           = 3 [ (display_name)="Allies"		];
+		}
+		message AverageSuspicion {
+			int32 overall               = 1							 ;
+			int32 unsuspicious_activity = 2 [ (display_name)="Unsuspicious Activity"	];
+			int32 returns_to_shadow     = 3 [ (display_name)="Returns to Shadow"		];
+			int32 fuzzy_dispatches      = 4 [ (display_name)="Fuzzy Dispatches"		];
+		}
+		message ProtomatterCreated {
+			int32 overall          = 1					 ;
+			int32 used             = 2 [ (display_name)="Used"		];
+			int32 decayed          = 3 [ (display_name)="Decayed"		];
+			int32 highest_spend    = 4 [ (display_name)="Highest Spend"	];
+		}
+		
+		Hosts                   hosts                         = 1 [ (display_name)="Hosts"     			];
+		int32                   unique_host_classes           = 2 [ (display_name)="Unique Host Classes"    	];
+		AverageSuspicion        average_suspicion             = 3 [ (display_name)="Average Host Suspicion"     ];
+		ProtomatterCreated      protomatter_created           = 4 [ (display_name)="Protomatter Created"   	];
+	}
 	
 	Build       build       = 1  [ (display_name)="Build"        ];
 	Resources   resources   = 2  [ (display_name)="Resources"    ];
@@ -2018,4 +2059,5 @@ message Stats {
 	Actions     actions     = 14 [ (display_name)="Actions"      ];
 	Rpglike     rpglike     = 15 [ (display_name)="RPGLIKE"      ];
 	Player2     player2     = 16 [ (display_name)="Player 2"     ];
+	Polymind    polymind    = 17 [ (display_name)="Polymind"     ];
 }
