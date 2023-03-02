@@ -1,5 +1,5 @@
 
-// Cogmind - Beta 11.2 (build 221224c)
+// Cogmind - Beta 12 (build 230303a)
 
 syntax = "proto3";
 
@@ -243,7 +243,7 @@ message Bonus {
 enum MapType {
 	MAP_NONE = 0;
 	MAP_SAN = 1	[(enum_display_name)="Sandbox"				,(enum_display_abbreviation)="San"	];
-	MAP_SCR = 2	[(enum_display_name)="Scrapyard"			,(enum_display_abbreviation)="Scr"	];
+	MAP_JUN = 2	[(enum_display_name)="Junkyard"				,(enum_display_abbreviation)="Jun"	];
 	MAP_MAT = 3	[(enum_display_name)="Materials"			,(enum_display_abbreviation)="Mat"	];
 	MAP_FAC = 4	[(enum_display_name)="Factory"				,(enum_display_abbreviation)="Fac"	];
 	MAP_RES = 5	[(enum_display_name)="Research"				,(enum_display_abbreviation)="Res"	];
@@ -256,6 +256,7 @@ enum MapType {
 	MAP_WAS = 12	[(enum_display_name)="Waste"				,(enum_display_abbreviation)="Was"	];
 	MAP_GAR = 13	[(enum_display_name)="Garrison"				,(enum_display_abbreviation)="Gar"	];
 	MAP_DSF = 35	[(enum_display_name)="DSF"				,(enum_display_abbreviation)="DSF"	];
+	MAP_SUB = 36	[(enum_display_name)="Subcaves"				,(enum_display_abbreviation)="Sub"	];
 	MAP_LOW = 14	[(enum_display_name)="Lower Caves"			,(enum_display_abbreviation)="Low"	];
 	MAP_UPP = 15	[(enum_display_name)="Upper Caves"			,(enum_display_abbreviation)="Upp"	];
 	MAP_PRO = 16	[(enum_display_name)="Proximity Caves"			,(enum_display_abbreviation)="Pro"	];
@@ -811,6 +812,12 @@ message Stats {
 			int32 final_capacity   = 5 [ (display_name)="Final Capacity"    ];
 			int32 final_carried    = 6 [ (display_name)="Final Carried"     ];
 		}
+		
+		message ScrapEngineConsumption {
+			int32 overall             = 1;
+			int32 constructs_created  = 2 [ (display_name)="Constructs Created"   ,(skip_zero)=true  ];
+			int32 constructs_modified = 3 [ (display_name)="Constructs Modified"  ,(skip_zero)=true  ];
+		}
 
 		SlotsEvolved             slots_evolved              = 1 [ (display_name)="Slots Evolved"               ];
 		PartsAttached            parts_attached             = 2 [ (display_name)="Parts Attached"              ];
@@ -819,6 +826,7 @@ message Stats {
 		int32                    naked_turns                = 5 [ (display_name)="Naked Turns"                 ];
 		HeaviestBuild            heaviest_build             = 6 [ (display_name)="Heaviest Build"              ];
 		LargestInventoryCapacity largest_inventory_capacity = 7 [ (display_name)="Largest Inventory Capacity"  ];
+		ScrapEngineConsumption   scrap_engine_consumption   = 8 [ (display_name)="Scrap Engine Consumption"    ];
 	}
 
 	message Resources {
@@ -860,106 +868,110 @@ message Stats {
 		}
 
 		message ClassesDestroyed {
-			int32 overall             = 1                                                            ;
-			int32 worker              = 2  [ (display_name)="Worker"              ,(skip_zero)=true ];
-			int32 builder             = 3  [ (display_name)="Builder"             ,(skip_zero)=true ];
-			int32 tunneler            = 4  [ (display_name)="Tunneler"            ,(skip_zero)=true ];
-			int32 hauler              = 5  [ (display_name)="Hauler"              ,(skip_zero)=true ];
-			int32 recycler            = 6  [ (display_name)="Recycler"            ,(skip_zero)=true ];
-			int32 carrier             = 7  [ (display_name)="Carrier"             ,(skip_zero)=true ];
-			int32 minesweeper         = 8  [ (display_name)="Minesweeper"         ,(skip_zero)=true ];
-			int32 mechanic            = 9  [ (display_name)="Mechanic"            ,(skip_zero)=true ];
-			int32 operator            = 10 [ (display_name)="Operator"            ,(skip_zero)=true ];
-			int32 drone               = 11 [ (display_name)="Drone"               ,(skip_zero)=true ];
-			int32 turret              = 12 [ (display_name)="Turret"              ,(skip_zero)=true ];
-			int32 watcher             = 13 [ (display_name)="Watcher"             ,(skip_zero)=true ];
-			int32 swarmer             = 14 [ (display_name)="Swarmer"             ,(skip_zero)=true ];
-			int32 cutter              = 96 [ (display_name)="Cutter"              ,(skip_zero)=true ];
-			int32 saboteur            = 15 [ (display_name)="Saboteur"            ,(skip_zero)=true ];
-			int32 grunt               = 16 [ (display_name)="Grunt"               ,(skip_zero)=true ];
-			int32 brawler             = 17 [ (display_name)="Brawler"             ,(skip_zero)=true ];
-			int32 duelist             = 18 [ (display_name)="Duelist"             ,(skip_zero)=true ];
-			int32 protector           = 19 [ (display_name)="Protector"           ,(skip_zero)=true ];
-			int32 researcher          = 20 [ (display_name)="Researcher"          ,(skip_zero)=true ];
-			int32 sentry              = 21 [ (display_name)="Sentry"              ,(skip_zero)=true ];
-			int32 demolisher          = 22 [ (display_name)="Demolisher"          ,(skip_zero)=true ];
-			int32 specialist          = 23 [ (display_name)="Specialist"          ,(skip_zero)=true ];
-			int32 hunter              = 24 [ (display_name)="Hunter"              ,(skip_zero)=true ];
-			int32 programmer          = 25 [ (display_name)="Programmer"          ,(skip_zero)=true ];
-			int32 heavy               = 95 [ (display_name)="Heavy"               ,(skip_zero)=true ];
-			int32 q_series            = 26 [ (display_name)="Q-Series"            ,(skip_zero)=true ];
-			int32 behemoth            = 27 [ (display_name)="Behemoth"            ,(skip_zero)=true ];
-			int32 compactor           = 28 [ (display_name)="Compactor"           ,(skip_zero)=true ];
-			int32 cetus_guard         = 29 [ (display_name)="Cetus Guard"         ,(skip_zero)=true ];
-			int32 quarantine_guard    = 30 [ (display_name)="Quarantine Guard"    ,(skip_zero)=true ];
-			int32 s7_guard            = 31 [ (display_name)="S7 Guard"            ,(skip_zero)=true ];
-			int32 m_guard             = 32 [ (display_name)="M Guard"             ,(skip_zero)=true ];
-			int32 m_shell_atk         = 98 [ (display_name)="M Shell/Atk"         ,(skip_zero)=true ];
-			int32 m_shell_def         = 99 [ (display_name)="M Shell/Def"         ,(skip_zero)=true ];
-			int32 enhanced_grunt      = 33 [ (display_name)="Enhanced Grunt"      ,(skip_zero)=true ];
-			int32 enhanced_sentry     = 34 [ (display_name)="Enhanced Sentry"     ,(skip_zero)=true ];
-			int32 enhanced_demolisher = 94 [ (display_name)="Enhanced Demolisher" ,(skip_zero)=true ];
-			int32 enhanced_hunter     = 35 [ (display_name)="Enhanced Hunter"     ,(skip_zero)=true ];
-			int32 enhanced_programmer = 36 [ (display_name)="Enhanced Programmer" ,(skip_zero)=true ];
-			int32 enhanced_qseries    = 93 [ (display_name)="Enhanced Q-Series"   ,(skip_zero)=true ];
-			int32 lightning           = 37 [ (display_name)="Lightning"           ,(skip_zero)=true ];
-			int32 tracker             = 38 [ (display_name)="Tracker"             ,(skip_zero)=true ];
-			int32 combat_programmer   = 39 [ (display_name)="Combat Programmer"   ,(skip_zero)=true ];
-			int32 investigator        = 40 [ (display_name)="Investigator"        ,(skip_zero)=true ];
-			int32 striker             = 41 [ (display_name)="Striker"             ,(skip_zero)=true ];
-			int32 executioner         = 42 [ (display_name)="Executioner"         ,(skip_zero)=true ];
-			int32 superbehemoth       = 43 [ (display_name)="Superbehemoth"       ,(skip_zero)=true ];
-			int32 alpha_7             = 44 [ (display_name)="Alpha 7"             ,(skip_zero)=true ];
-			int32 fortress            = 45 [ (display_name)="Fortress"            ,(skip_zero)=true ];
-			int32 protovariant_g      = 46 [ (display_name)="Protovariant G"      ,(skip_zero)=true ];
-			int32 protovariant_l      = 47 [ (display_name)="Protovariant L"      ,(skip_zero)=true ];
-			int32 protovariant_y      = 48 [ (display_name)="Protovariant Y"      ,(skip_zero)=true ];
-			int32 protovariant_d      = 49 [ (display_name)="Protovariant D"      ,(skip_zero)=true ];
-			int32 protovariant_x      = 50 [ (display_name)="Protovariant X"      ,(skip_zero)=true ];
-			int32 protovariant_h      = 51 [ (display_name)="Protovariant H"      ,(skip_zero)=true ];
-			int32 protovariant_p      = 52 [ (display_name)="Protovariant P"      ,(skip_zero)=true ];
-			int32 zionite             = 53 [ (display_name)="Zionite"             ,(skip_zero)=true ];
-			int32 z_technician        = 54 [ (display_name)="Z-Technician"        ,(skip_zero)=true ];
-			int32 z_courier           = 55 [ (display_name)="Z-Courier"           ,(skip_zero)=true ];
-			int32 z_light             = 56 [ (display_name)="Z-Light"             ,(skip_zero)=true ];
-			int32 z_heavy             = 57 [ (display_name)="Z-Heavy"             ,(skip_zero)=true ];
-			int32 z_ex                = 58 [ (display_name)="Z-EX"                ,(skip_zero)=true ];
-			int32 decomposer          = 59 [ (display_name)="Decomposer"          ,(skip_zero)=true ];
-			int32 packrat             = 60 [ (display_name)="Packrat"             ,(skip_zero)=true ];
-			int32 samaritan           = 61 [ (display_name)="Samaritan"           ,(skip_zero)=true ];
-			int32 tinkerer            = 62 [ (display_name)="Tinkerer"            ,(skip_zero)=true ];
-			int32 demented            = 63 [ (display_name)="Demented"            ,(skip_zero)=true ];
-			int32 furnace             = 64 [ (display_name)="Furnace"             ,(skip_zero)=true ];
-			int32 parasite            = 65 [ (display_name)="Parasite"            ,(skip_zero)=true ];
-			int32 thief               = 66 [ (display_name)="Thief"               ,(skip_zero)=true ];
-			int32 master_thief        = 67 [ (display_name)="Master Thief"        ,(skip_zero)=true ];
-			int32 assembler           = 68 [ (display_name)="Assembler"           ,(skip_zero)=true ];
-			int32 assembled           = 69 [ (display_name)="Assembled"           ,(skip_zero)=true ];
-			int32 golem               = 70 [ (display_name)="Golem"               ,(skip_zero)=true ];
-			int32 surgeon             = 71 [ (display_name)="Surgeon"             ,(skip_zero)=true ];
-			int32 wasp                = 72 [ (display_name)="Wasp"                ,(skip_zero)=true ];
-			int32 thug                = 73 [ (display_name)="Thug"                ,(skip_zero)=true ];
-			int32 savage              = 74 [ (display_name)="Savage"              ,(skip_zero)=true ];
-			int32 butcher             = 75 [ (display_name)="Butcher"             ,(skip_zero)=true ];
-			int32 bouncer             = 76 [ (display_name)="Bouncer"             ,(skip_zero)=true ];
-			int32 martyr              = 77 [ (display_name)="Martyr"              ,(skip_zero)=true ];
-			int32 guerrilla           = 78 [ (display_name)="Guerrilla"           ,(skip_zero)=true ];
-			int32 wizard              = 79 [ (display_name)="Wizard"              ,(skip_zero)=true ];
-			int32 marauder            = 80 [ (display_name)="Marauder"            ,(skip_zero)=true ];
-			int32 fireman             = 81 [ (display_name)="Fireman"             ,(skip_zero)=true ];
-			int32 mutant              = 82 [ (display_name)="Mutant"              ,(skip_zero)=true ];
-			int32 sapper              = 97 [ (display_name)="Sapper"              ,(skip_zero)=true ];
-			int32 commander           = 83 [ (display_name)="Commander"           ,(skip_zero)=true ];
-			int32 knight              = 84 [ (display_name)="Knight"              ,(skip_zero)=true ];
-			int32 troll               = 85 [ (display_name)="Troll"               ,(skip_zero)=true ];
-			int32 dragon              = 86 [ (display_name)="Dragon"              ,(skip_zero)=true ];
-			int32 hydra               = 87 [ (display_name)="Hydra"               ,(skip_zero)=true ];
-			int32 borebot             = 88 [ (display_name)="Borebot"             ,(skip_zero)=true ];
-			int32 revision            = 89 [ (display_name)="Revision"            ,(skip_zero)=true ];
-			int32 abomination         = 90 [ (display_name)="Abomination"         ,(skip_zero)=true ];
-			int32 anomaly             = 91 [ (display_name)="Anomaly"             ,(skip_zero)=true ];
-			int32 player              = 92 [ (display_name)="Player"              ,(skip_zero)=true ];
-			// next = 100
+			int32 overall             = 1                                                             ;
+			int32 worker              = 2   [ (display_name)="Worker"              ,(skip_zero)=true ];
+			int32 builder             = 3   [ (display_name)="Builder"             ,(skip_zero)=true ];
+			int32 tunneler            = 4   [ (display_name)="Tunneler"            ,(skip_zero)=true ];
+			int32 hauler              = 5   [ (display_name)="Hauler"              ,(skip_zero)=true ];
+			int32 recycler            = 6   [ (display_name)="Recycler"            ,(skip_zero)=true ];
+			int32 carrier             = 7   [ (display_name)="Carrier"             ,(skip_zero)=true ];
+			int32 minesweeper         = 8   [ (display_name)="Minesweeper"         ,(skip_zero)=true ];
+			int32 mechanic            = 9   [ (display_name)="Mechanic"            ,(skip_zero)=true ];
+			int32 operator            = 10  [ (display_name)="Operator"            ,(skip_zero)=true ];
+			int32 drone               = 11  [ (display_name)="Drone"               ,(skip_zero)=true ];
+			int32 turret              = 12  [ (display_name)="Turret"              ,(skip_zero)=true ];
+			int32 watcher             = 13  [ (display_name)="Watcher"             ,(skip_zero)=true ];
+			int32 swarmer             = 14  [ (display_name)="Swarmer"             ,(skip_zero)=true ];
+			int32 cutter              = 96  [ (display_name)="Cutter"              ,(skip_zero)=true ];
+			int32 saboteur            = 15  [ (display_name)="Saboteur"            ,(skip_zero)=true ];
+			int32 grunt               = 16  [ (display_name)="Grunt"               ,(skip_zero)=true ];
+			int32 brawler             = 17  [ (display_name)="Brawler"             ,(skip_zero)=true ];
+			int32 duelist             = 18  [ (display_name)="Duelist"             ,(skip_zero)=true ];
+			int32 protector           = 19  [ (display_name)="Protector"           ,(skip_zero)=true ];
+			int32 researcher          = 20  [ (display_name)="Researcher"          ,(skip_zero)=true ];
+			int32 sentry              = 21  [ (display_name)="Sentry"              ,(skip_zero)=true ];
+			int32 demolisher          = 22  [ (display_name)="Demolisher"          ,(skip_zero)=true ];
+			int32 specialist          = 23  [ (display_name)="Specialist"          ,(skip_zero)=true ];
+			int32 hunter              = 24  [ (display_name)="Hunter"              ,(skip_zero)=true ];
+			int32 programmer          = 25  [ (display_name)="Programmer"          ,(skip_zero)=true ];
+			int32 heavy               = 95  [ (display_name)="Heavy"               ,(skip_zero)=true ];
+			int32 q_series            = 26  [ (display_name)="Q-Series"            ,(skip_zero)=true ];
+			int32 behemoth            = 27  [ (display_name)="Behemoth"            ,(skip_zero)=true ];
+			int32 compactor           = 28  [ (display_name)="Compactor"           ,(skip_zero)=true ];
+			int32 cetus_guard         = 29  [ (display_name)="Cetus Guard"         ,(skip_zero)=true ];
+			int32 quarantine_guard    = 30  [ (display_name)="Quarantine Guard"    ,(skip_zero)=true ];
+			int32 s7_guard            = 31  [ (display_name)="S7 Guard"            ,(skip_zero)=true ];
+			int32 m_guard             = 32  [ (display_name)="M Guard"             ,(skip_zero)=true ];
+			int32 m_shell_atk         = 98  [ (display_name)="M Shell/Atk"         ,(skip_zero)=true ];
+			int32 m_shell_def         = 99  [ (display_name)="M Shell/Def"         ,(skip_zero)=true ];
+			int32 enhanced_grunt      = 33  [ (display_name)="Enhanced Grunt"      ,(skip_zero)=true ];
+			int32 enhanced_sentry     = 34  [ (display_name)="Enhanced Sentry"     ,(skip_zero)=true ];
+			int32 enhanced_demolisher = 94  [ (display_name)="Enhanced Demolisher" ,(skip_zero)=true ];
+			int32 enhanced_hunter     = 35  [ (display_name)="Enhanced Hunter"     ,(skip_zero)=true ];
+			int32 enhanced_programmer = 36  [ (display_name)="Enhanced Programmer" ,(skip_zero)=true ];
+			int32 enhanced_qseries    = 93  [ (display_name)="Enhanced Q-Series"   ,(skip_zero)=true ];
+			int32 lightning           = 37  [ (display_name)="Lightning"           ,(skip_zero)=true ];
+			int32 tracker             = 38  [ (display_name)="Tracker"             ,(skip_zero)=true ];
+			int32 combat_programmer   = 39  [ (display_name)="Combat Programmer"   ,(skip_zero)=true ];
+			int32 investigator        = 40  [ (display_name)="Investigator"        ,(skip_zero)=true ];
+			int32 striker             = 41  [ (display_name)="Striker"             ,(skip_zero)=true ];
+			int32 executioner         = 42  [ (display_name)="Executioner"         ,(skip_zero)=true ];
+			int32 superbehemoth       = 43  [ (display_name)="Superbehemoth"       ,(skip_zero)=true ];
+			int32 alpha_7             = 44  [ (display_name)="Alpha 7"             ,(skip_zero)=true ];
+			int32 fortress            = 45  [ (display_name)="Fortress"            ,(skip_zero)=true ];
+			int32 protovariant_g      = 46  [ (display_name)="Protovariant G"      ,(skip_zero)=true ];
+			int32 protovariant_l      = 47  [ (display_name)="Protovariant L"      ,(skip_zero)=true ];
+			int32 protovariant_y      = 48  [ (display_name)="Protovariant Y"      ,(skip_zero)=true ];
+			int32 protovariant_d      = 49  [ (display_name)="Protovariant D"      ,(skip_zero)=true ];
+			int32 protovariant_x      = 50  [ (display_name)="Protovariant X"      ,(skip_zero)=true ];
+			int32 protovariant_h      = 51  [ (display_name)="Protovariant H"      ,(skip_zero)=true ];
+			int32 protovariant_p      = 52  [ (display_name)="Protovariant P"      ,(skip_zero)=true ];
+			int32 artisan             = 102 [ (display_name)="Artisan"             ,(skip_zero)=true ];
+			int32 cobbler             = 103 [ (display_name)="Cobbler"             ,(skip_zero)=true ];
+			int32 subdweller          = 101 [ (display_name)="Subdweller"          ,(skip_zero)=true ];
+			int32 zionite             = 53  [ (display_name)="Zionite"             ,(skip_zero)=true ];
+			int32 z_technician        = 54  [ (display_name)="Z-Technician"        ,(skip_zero)=true ];
+			int32 z_courier           = 55  [ (display_name)="Z-Courier"           ,(skip_zero)=true ];
+			int32 z_light             = 56  [ (display_name)="Z-Light"             ,(skip_zero)=true ];
+			int32 z_heavy             = 57  [ (display_name)="Z-Heavy"             ,(skip_zero)=true ];
+			int32 z_ex                = 58  [ (display_name)="Z-EX"                ,(skip_zero)=true ];
+			int32 decomposer          = 59  [ (display_name)="Decomposer"          ,(skip_zero)=true ];
+			int32 packrat             = 60  [ (display_name)="Packrat"             ,(skip_zero)=true ];
+			int32 samaritan           = 61  [ (display_name)="Samaritan"           ,(skip_zero)=true ];
+			int32 tinkerer            = 62  [ (display_name)="Tinkerer"            ,(skip_zero)=true ];
+			int32 demented            = 63  [ (display_name)="Demented"            ,(skip_zero)=true ];
+			int32 furnace             = 64  [ (display_name)="Furnace"             ,(skip_zero)=true ];
+			int32 parasite            = 65  [ (display_name)="Parasite"            ,(skip_zero)=true ];
+			int32 thief               = 66  [ (display_name)="Thief"               ,(skip_zero)=true ];
+			int32 master_thief        = 67  [ (display_name)="Master Thief"        ,(skip_zero)=true ];
+			int32 assembler           = 68  [ (display_name)="Assembler"           ,(skip_zero)=true ];
+			int32 assembled           = 69  [ (display_name)="Assembled"           ,(skip_zero)=true ];
+			int32 golem               = 70  [ (display_name)="Golem"               ,(skip_zero)=true ];
+			int32 surgeon             = 71  [ (display_name)="Surgeon"             ,(skip_zero)=true ];
+			int32 wasp                = 72  [ (display_name)="Wasp"                ,(skip_zero)=true ];
+			int32 thug                = 73  [ (display_name)="Thug"                ,(skip_zero)=true ];
+			int32 savage              = 74  [ (display_name)="Savage"              ,(skip_zero)=true ];
+			int32 butcher             = 75  [ (display_name)="Butcher"             ,(skip_zero)=true ];
+			int32 bouncer             = 76  [ (display_name)="Bouncer"             ,(skip_zero)=true ];
+			int32 martyr              = 77  [ (display_name)="Martyr"              ,(skip_zero)=true ];
+			int32 guerrilla           = 78  [ (display_name)="Guerrilla"           ,(skip_zero)=true ];
+			int32 wizard              = 79  [ (display_name)="Wizard"              ,(skip_zero)=true ];
+			int32 marauder            = 80  [ (display_name)="Marauder"            ,(skip_zero)=true ];
+			int32 fireman             = 81  [ (display_name)="Fireman"             ,(skip_zero)=true ];
+			int32 mutant              = 82  [ (display_name)="Mutant"              ,(skip_zero)=true ];
+			int32 infiltrator         = 100 [ (display_name)="Infiltrator"         ,(skip_zero)=true ];
+			int32 sapper              = 97  [ (display_name)="Sapper"              ,(skip_zero)=true ];
+			int32 commander           = 83  [ (display_name)="Commander"           ,(skip_zero)=true ];
+			int32 knight              = 84  [ (display_name)="Knight"              ,(skip_zero)=true ];
+			int32 troll               = 85  [ (display_name)="Troll"               ,(skip_zero)=true ];
+			int32 dragon              = 86  [ (display_name)="Dragon"              ,(skip_zero)=true ];
+			int32 hydra               = 87  [ (display_name)="Hydra"               ,(skip_zero)=true ];
+			int32 borebot             = 88  [ (display_name)="Borebot"             ,(skip_zero)=true ];
+			int32 revision            = 89  [ (display_name)="Revision"            ,(skip_zero)=true ];
+			int32 abomination         = 90  [ (display_name)="Abomination"         ,(skip_zero)=true ];
+			int32 anomaly             = 91  [ (display_name)="Anomaly"             ,(skip_zero)=true ];
+			int32 player              = 92  [ (display_name)="Player"              ,(skip_zero)=true ];
+			// next = 104
 		}
 
 		message BestKillStreak {
@@ -1100,6 +1112,7 @@ message Stats {
 				int32 heat_flow_errors  = 4  [ (display_name)="Heat Flow Errors"  ,(skip_zero)=true ];
 				int32 energy_discharges = 5  [ (display_name)="Energy Discharges" ,(skip_zero)=true ];
 				int32 parts_rejected    = 6  [ (display_name)="Parts Rejected"    ,(skip_zero)=true ];
+				int32 parts_fused       = 14 [ (display_name)="Parts Fused"       ,(skip_zero)=true ];
 				int32 data_loss_minor_  = 7  [ (display_name)="Data Loss (minor)" ,(skip_zero)=true ];
 				int32 data_loss_major_  = 8  [ (display_name)="Data Loss (major)" ,(skip_zero)=true ];
 				int32 misfires          = 9  [ (display_name)="Misfires"          ,(skip_zero)=true ];
@@ -1336,7 +1349,8 @@ message Stats {
 
 		MachinesDisabled machines_disabled     = 1 [ (display_name)="Machines Disabled"                       ];
 		int32            machines_sabotaged    = 2 [ (display_name)="Machines Sabotaged"                      ];
-		int32            garrisons_compromised = 3 [ (display_name)="Garrisons Compromised"                   ];
+		int32            machines_repaired     = 6 [ (display_name)="Machines Repaired"                       ];
+		int32            garrisons_compromised = 3 [ (display_name)="Garrisons Compromised" ,(skip_zero)=true ]; // deprecated as of Beta 12 and not loaded, but leaving here for now
 		int32            overloaded_fab_kills  = 4 [ (display_name)="Overloaded Fab Kills"                    ];
 		int32            fab_network_shutdowns = 5 [ (display_name)="Fab Network Shutdowns" ,(skip_zero)=true ]; // deprecated as of Beta 11 and not loaded, but leaving here for now
 	}
@@ -1416,15 +1430,19 @@ message Stats {
 			int32 registered_components   = 41 [ (display_name)="Registered Components"   ,(skip_zero)=true ];
 			int32 registered_prototypes   = 42 [ (display_name)="Registered Prototypes"   ,(skip_zero)=true ];
 			int32 zone_layout             = 43 [ (display_name)="Zone Layout"             ,(skip_zero)=true ];
+			int32 download_registry       = 54 [ (display_name)="Garrison Registry"       ,(skip_zero)=true ];
+			int32 download_navigation     = 55 [ (display_name)="Patrol Navigation"       ,(skip_zero)=true ];
+			int32 download_security       = 56 [ (display_name)="Security Stations"       ,(skip_zero)=true ];			
 			int32 ex_prototype_id_bank    = 44 [ (display_name)="EX-Prototype ID Bank"    ,(skip_zero)=true ];
 			int32 protovariant_controls   = 45 [ (display_name)="Protovariant Controls"   ,(skip_zero)=true ];
 			int32 activate_exoskeleton    = 46 [ (display_name)="Activate Exoskeleton"    ,(skip_zero)=true ];
 			int32 disengage_seal          = 47 [ (display_name)="Disengage Seal"          ,(skip_zero)=true ];
+			int32 release_object          = 53 [ (display_name)="Release Object"          ,(skip_zero)=true ];
 			int32 gate_test_138_a         = 48 [ (display_name)="Gate Test 138-A"         ,(skip_zero)=true ];
 			int32 gate_test_138_b         = 49 [ (display_name)="Gate Test 138-B"         ,(skip_zero)=true ];
 			int32 gate_test_138_c         = 50 [ (display_name)="Gate Test 138-C"         ,(skip_zero)=true ];
 			int32 gate_test_138_end       = 51 [ (display_name)="Gate Test 138-END"       ,(skip_zero)=true ];
-			// next ID: 53
+			// next ID: 57
 		}
 
 		message FabricatorHacks {
@@ -1466,14 +1484,15 @@ message Stats {
 		message UnauthorizedHacks {
 			message Terminals {
 				int32 overall    = 1                                                  ;
-				int32 track      = 2 [ (display_name)="Track"      ,(skip_zero)=true ];
-				int32 assimilate = 3 [ (display_name)="Assimilate" ,(skip_zero)=true ];
-				int32 botnet     = 4 [ (display_name)="Botnet"     ,(skip_zero)=true ];
-				int32 detonate   = 5 [ (display_name)="Detonate"   ,(skip_zero)=true ];
-				int32 disrupt    = 6 [ (display_name)="Disrupt"    ,(skip_zero)=true ];
-				int32 operators  = 7 [ (display_name)="Operators"  ,(skip_zero)=true ];
-				int32 sabotage   = 8 [ (display_name)="Sabotage"   ,(skip_zero)=true ];
-				int32 search     = 9 [ (display_name)="Search"     ,(skip_zero)=true ];
+				int32 track      = 2  [ (display_name)="Track"      ,(skip_zero)=true ];
+				int32 assimilate = 3  [ (display_name)="Assimilate" ,(skip_zero)=true ];
+				int32 botnet     = 4  [ (display_name)="Botnet"     ,(skip_zero)=true ];
+				int32 detonate   = 5  [ (display_name)="Detonate"   ,(skip_zero)=true ];
+				int32 disrupt    = 6  [ (display_name)="Disrupt"    ,(skip_zero)=true ];
+				int32 operators  = 7  [ (display_name)="Operators"  ,(skip_zero)=true ];
+				int32 sabotage   = 8  [ (display_name)="Sabotage"   ,(skip_zero)=true ];
+				int32 search     = 9  [ (display_name)="Search"     ,(skip_zero)=true ];
+				int32 override   = 10 [ (display_name)="Override"   ,(skip_zero)=true ];
 			}
 
 			message Fabricators {
@@ -1613,6 +1632,7 @@ message Stats {
 			int32 overall              = 1                                                             ;
 			int32 coupler_efficiency   = 2  [ (display_name)="Coupler Efficiency"   ,(skip_zero)=true ];
 			int32 hotswap              = 11 [ (display_name)="Hotswap"              ,(skip_zero)=true ];
+			int32 code_merge           = 17 [ (display_name)="Code Merge"           ,(skip_zero)=true ];
 			int32 command_fork         = 12 [ (display_name)="Command Fork"         ,(skip_zero)=true ];
 			int32 threat_obfuscation   = 13 [ (display_name)="Threat Obfuscation"   ,(skip_zero)=true ];
 			int32 signal_jamming       = 14 [ (display_name)="Signal Jamming"       ,(skip_zero)=true ];
@@ -1684,6 +1704,7 @@ message Stats {
 			int32 report_schematics     = 44 [ (display_name)="report_schematics"     ,(skip_zero)=true ];
 			int32 report_analyses       = 45 [ (display_name)="report_analyses"       ,(skip_zero)=true ];
 			int32 ignore_targets        = 46 [ (display_name)="ignore_targets"        ,(skip_zero)=true ];
+			int32 emergency_deploy      = 75 [ (display_name)="emergency_deploy"      ,(skip_zero)=true ];
 			int32 find_shortcuts        = 47 [ (display_name)="find_shortcuts"        ,(skip_zero)=true ];
 			int32 find_garrison         = 48 [ (display_name)="find_garrison"         ,(skip_zero)=true ];
 			int32 show_paths            = 49 [ (display_name)="show_paths"            ,(skip_zero)=true ];
@@ -1708,9 +1729,10 @@ message Stats {
 			int32 streamctrl_high       = 68 [ (display_name)="streamctrl_high"       ,(skip_zero)=true ];
 			int32 formatsys_low         = 69 [ (display_name)="formatsys_low"         ,(skip_zero)=true ];
 			int32 formatsys_high        = 70 [ (display_name)="formatsys_high"        ,(skip_zero)=true ];
+			int32 formatsys_deep        = 74 [ (display_name)="formatsys_deep"        ,(skip_zero)=true ];
 			int32 retrieve_part         = 71 [ (display_name)="retrieve_part"         ,(skip_zero)=true ];
 			int32 manual                = 72 [ (display_name)="Manual"                ,(skip_zero)=true ];
-			// next = 74
+			// next = 76
 		}
 
 		message RelayCouplersReleased {
@@ -1720,6 +1742,7 @@ message Stats {
 			int32 programmers         = 4 [ (display_name)="Programmers"         ,(skip_zero)=true ];
 			int32 attached            = 5 [ (display_name)="Attached"            ,(skip_zero)=true ];
 			int32 crosswired          = 6 [ (display_name)="Crosswired"          ,(skip_zero)=true ];
+			int32 merged_code_value   = 7 [ (display_name)="Merged Code Value"   ,(skip_zero)=true ];
 		}
 
 		message FabnetPeakEffectivePercent {
@@ -1770,6 +1793,18 @@ message Stats {
 			int32 zionite_resupply   = 22 [ (display_name)="Zionite Resupply"   ,(skip_zero)=true ];
 		}
 
+		message WarlordSquadRendezvous {
+			int32 overall   = 1  [                             (skip_zero)=true ];
+			int32 dakka     = 2  [ (display_name)="Dakka"     ,(skip_zero)=true ];
+			int32 infantry  = 3  [ (display_name)="Infantry"  ,(skip_zero)=true ];
+			int32 muscle    = 4  [ (display_name)="Muscle"    ,(skip_zero)=true ];
+			int32 geek      = 5  [ (display_name)="Geek"      ,(skip_zero)=true ];
+			int32 ranger    = 6  [ (display_name)="Ranger"    ,(skip_zero)=true ];
+			int32 pyro      = 7  [ (display_name)="Pyro"      ,(skip_zero)=true ];
+			int32 chimera   = 8  [ (display_name)="Chimera"   ,(skip_zero)=true ];
+			int32 ghost     = 9  [ (display_name)="Ghost"     ,(skip_zero)=true ];
+		}
+
 		message TotalOrders {
 			int32 overall = 1                                                ;
 			int32 stay    = 2  [ (display_name)="STAY"    ,(skip_zero)=true ];
@@ -1792,15 +1827,16 @@ message Stats {
 			int32 kills        = 3 [ (display_name)="Kills"         ];
 		}
 
-		TotalAllies       total_allies         = 1 [ (display_name)="Total Allies"                           ];
-		ZioniteDispatches zionite_dispatches   = 2 [ (display_name)="Zionite Dispatches"                     ];
-		TotalOrders       total_orders         = 3 [ (display_name)="Total Orders"                           ];
-		AllyAttacks       ally_attacks         = 4 [ (display_name)="Ally Attacks"                           ];
-		int32             allies_corrupted     = 5 [ (display_name)="Allies Corrupted"                       ];
-		int32             allies_melted        = 6 [ (display_name)="Allies Melted"                          ];
-		int32             turrets_deployed     = 7 [ (display_name)="Turrets Deployed"     ,(skip_zero)=true ];
-		int32             fabricated_assembled = 8 [ (display_name)="Fabricated Assembled" ,(skip_zero)=true ];
-		int32             field_lobotomies     = 9 [ (display_name)="Field Lobotomies"     ,(skip_zero)=true ];
+		TotalAllies            total_allies             = 1  [ (display_name)="Total Allies"                           ];
+		ZioniteDispatches      zionite_dispatches       = 2  [ (display_name)="Zionite Dispatches"                     ];
+		WarlordSquadRendezvous warlord_squad_rendezvous = 10 [ (display_name)="Warlord Squad Rendezvous"               ];
+		TotalOrders            total_orders             = 3  [ (display_name)="Total Orders"                           ];
+		AllyAttacks            ally_attacks             = 4  [ (display_name)="Ally Attacks"                           ];
+		int32                  allies_corrupted         = 5  [ (display_name)="Allies Corrupted"                       ];
+		int32                  allies_melted            = 6  [ (display_name)="Allies Melted"                          ];
+		int32                  turrets_deployed         = 7  [ (display_name)="Turrets Deployed"     ,(skip_zero)=true ];
+		int32                  fabricated_assembled     = 8  [ (display_name)="Fabricated Assembled" ,(skip_zero)=true ];
+		int32                  field_lobotomies         = 9  [ (display_name)="Field Lobotomies"     ,(skip_zero)=true ];
 	}
 
 	message Intel {
