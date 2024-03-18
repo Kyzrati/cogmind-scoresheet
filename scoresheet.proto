@@ -1,5 +1,5 @@
 
-// Cogmind - Beta 13 (build 240227c)
+// Cogmind - Beta 13 (build 240318a)
 
 syntax = "proto3";
 
@@ -619,6 +619,7 @@ enum SteamType {
 	STEAM_NONE		= 0	[(enum_display_name)="None"		];
 	STEAM_INITIALIZED	= 1	[(enum_display_name)="Initialized"	];
 	STEAM_UNINITIALIZED	= 2	[(enum_display_name)="Uninitialized"	];
+	STEAM_DECK		= 3	[(enum_display_name)="Deck"		];
 }
 message Options {
 	UiLayoutType		layout			= 14 [(display_name)="Layout"		];
