@@ -1,5 +1,5 @@
 
-// Cogmind - Beta 13 (build 240318a)
+// Cogmind - Beta 14 (build 240806a)
 
 syntax = "proto3";
 
@@ -175,12 +175,17 @@ message Bonus {
 	int32 forged_quantum_companion		= 80	[(display_name)="Forged Quantum Companion"	,(skip_zero)=true	];
 	int32 awakened_behemoth_slayer		= 81	[(display_name)="Awakened Behemoth Slayer"	,(skip_zero)=true	];
 	int32 finished_modified_em_gauss	= 82	[(display_name)="Finished Modified EM Gauss"	,(skip_zero)=true	];
+	int32 built_pl3xns_obliterator		= 90	[(display_name)="Built PL-3XN's Obliterator"	,(skip_zero)=true	];	
 	int32 installed_lc_capacitor		= 83	[(display_name)="Installed LC Capacitor"	,(skip_zero)=true	];	
+	int32 subatomizer_sterilization		= 89	[(display_name)="Subatomizer Sterilization"	,(skip_zero)=true	];		
 	int32 entered_garrisons			= 18	[(display_name)="Entered Garrisons"		,(skip_zero)=true	];
 	int32 used_rif_installer		= 19	[(display_name)="Used RIF Installer"		,(skip_zero)=true	];
 	int32 entered_dsfs			= 77	[(display_name)="Entered DSFs"			,(skip_zero)=true	];
 	int32 network_hubs_disabled		= 20	[(display_name)="Network Hubs Disabled"		,(skip_zero)=true	];
 	int32 aligned_with_farcom		= 21	[(display_name)="Aligned with FarCom"		,(skip_zero)=true	];
+	int32 delivered_subcon_basin		= 88	[(display_name)="Delivered SUBCON Basin"	,(skip_zero)=true	];
+	int32 registered_with_ufd		= 86	[(display_name)="Registered with UFD"		,(skip_zero)=true	];
+	int32 met_optimus_in_hq			= 87	[(display_name)="Met Optimus in HQ"		,(skip_zero)=true	];
 	int32 met_data_miner			= 22	[(display_name)="Met Data Miner"		,(skip_zero)=true	];
 	int32 used_data_conduit			= 23	[(display_name)="Used Data Conduit"		,(skip_zero)=true	];
 	int32 met_imprinter			= 24	[(display_name)="Met Imprinter"			,(skip_zero)=true	];
@@ -197,6 +202,7 @@ message Bonus {
 	int32 a7_reached_mainframe		= 34	[(display_name)="A7 Reached Mainframe"		,(skip_zero)=true	];
 	int32 met_r17_at_cetus			= 35	[(display_name)="Met R17 at Cetus"		,(skip_zero)=true	];
 	int32 read_decrypted_archives		= 36	[(display_name)="Read Decrypted Archives"	,(skip_zero)=true	];
+	int32 bested_vlgr5			= 85	[(display_name)="Bested VL-GR5"			,(skip_zero)=true	];
 	int32 found_hidden_lab			= 37	[(display_name)="Found Hidden Lab"		,(skip_zero)=true	];
 	int32 decrypted_a0_command		= 38	[(display_name)="Decrypted A0 Command"		,(skip_zero)=true	];
 	int32 used_core_reset_matrix		= 39	[(display_name)="Used Core Reset Matrix"	,(skip_zero)=true	];
@@ -238,7 +244,7 @@ message Bonus {
 	int32 win_speed				= 72	[(display_name)="Win Speed"			,(skip_zero)=true	];
 	int32 challenge_win			= 73	[(display_name)="Challenge Win"			,(skip_zero)=true	];
 	int32 friendly_fire			= 74	[(display_name)="Friendly Fire"			,(skip_zero)=true	];
-	//next = 85
+	//next = 91
 }
 
 //------------------------------------------------------------------
@@ -813,6 +819,12 @@ message Stats {
 			int32 special_melee_weapon = 25 [ (display_name)="Special Melee Weapon" ,(skip_zero)=true ];
 		}
 
+		message PeakBuildRating {
+			int32 overall        = 1                                    ;
+			int32 average_rating = 2 [ (display_name)="Average Rating" ];
+			int32 on_entrance    = 3 [ (display_name)="On Entrance"    ];
+		}
+
 		message HeaviestBuild {
 			int32 overall                   = 1                                              ;
 			int32 greatest_support          = 2 [ (display_name)="Greatest Support"         ];
@@ -839,6 +851,7 @@ message Stats {
 		PartsAttached            parts_attached             = 2 [ (display_name)="Parts Attached"              ];
 		PartsLost                parts_lost                 = 3 [ (display_name)="Parts Lost"                  ];
 		AverageSlotUsagePercent  average_slot_usage_percent = 4 [ (display_name)="Average Slot Usage (%)"      ];
+		PeakBuildRating          peak_build_rating          = 9 [ (display_name)="Peak Build Rating"           ];
 		int32                    naked_turns                = 5 [ (display_name)="Naked Turns"                 ];
 		HeaviestBuild            heaviest_build             = 6 [ (display_name)="Heaviest Build"              ];
 		LargestInventoryCapacity largest_inventory_capacity = 7 [ (display_name)="Largest Inventory Capacity"  ];
@@ -914,6 +927,7 @@ message Stats {
 			int32 q_series            = 26  [ (display_name)="Q-Series"            ,(skip_zero)=true ];
 			int32 behemoth            = 27  [ (display_name)="Behemoth"            ,(skip_zero)=true ];
 			int32 compactor           = 28  [ (display_name)="Compactor"           ,(skip_zero)=true ];
+			int32 armor_guard         = 114 [ (display_name)="Armor Guard"         ,(skip_zero)=true ];
 			int32 cetus_guard         = 29  [ (display_name)="Cetus Guard"         ,(skip_zero)=true ];
 			int32 quarantine_guard    = 30  [ (display_name)="Quarantine Guard"    ,(skip_zero)=true ];
 			int32 s7_guard            = 31  [ (display_name)="S7 Guard"            ,(skip_zero)=true ];
@@ -997,7 +1011,7 @@ message Stats {
 			int32 abomination         = 90  [ (display_name)="Abomination"         ,(skip_zero)=true ];
 			int32 anomaly             = 91  [ (display_name)="Anomaly"             ,(skip_zero)=true ];
 			int32 player              = 92  [ (display_name)="Player"              ,(skip_zero)=true ];
-			// next = 114
+			// next = 115
 		}
 
 		message BestKillStreak {
@@ -1532,6 +1546,7 @@ message Stats {
 				int32 detonate   = 5  [ (display_name)="Detonate"   ,(skip_zero)=true ];
 				int32 disrupt    = 6  [ (display_name)="Disrupt"    ,(skip_zero)=true ];
 				int32 operators  = 7  [ (display_name)="Operators"  ,(skip_zero)=true ];
+				int32 skim       = 11 [ (display_name)="Skim"       ,(skip_zero)=true ];
 				int32 sabotage   = 8  [ (display_name)="Sabotage"   ,(skip_zero)=true ];
 				int32 search     = 9  [ (display_name)="Search"     ,(skip_zero)=true ];
 				int32 override   = 10 [ (display_name)="Override"   ,(skip_zero)=true ];
@@ -1552,6 +1567,7 @@ message Stats {
 			message RepairStations {
 				int32 overall   = 1                                                 ;
 				int32 mechanics = 2 [ (display_name)="Mechanics" ,(skip_zero)=true ];
+				int32 patch     = 3 [ (display_name)="Patch"     ,(skip_zero)=true ];
 			}
 
 			message RecyclingUnits {
@@ -1561,6 +1577,9 @@ message Stats {
 				int32 recyclers = 4 [ (display_name)="Recyclers" ,(skip_zero)=true ];
 				int32 mask      = 5 [ (display_name)="Mask"      ,(skip_zero)=true ];
 				int32 tunnel    = 6 [ (display_name)="Tunnel"    ,(skip_zero)=true ];
+				int32 fedlink   = 7 [ (display_name)="Fedlink"   ,(skip_zero)=true ];
+				int32 scrapoids = 8 [ (display_name)="Scrapoids" ,(skip_zero)=true ];
+				int32 scraphulk = 9 [ (display_name)="Scraphulk" ,(skip_zero)=true ];
 			}
 
 			message Scanalyzers {
