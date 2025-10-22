@@ -1,5 +1,5 @@
 
-// Cogmind - Beta 15 (build 250505a)
+// Cogmind - Beta 16 (build 251021a)
 
 syntax = "proto3";
 
@@ -121,6 +121,7 @@ enum SpecialModeType {
 message Header {
 	string		filename	= 1	[(display_name)="Filename"		];
 	string		version		= 2	[(display_name)="Version"		];
+	string		build		= 10	[(display_name)="Build"			];
 	DifficultyType	difficulty	= 3	[(display_name)="Difficulty"		];
 	string		run_end_date	= 4	[(display_name)="Run End Date"		];
 	string		run_end_time	= 5	[(display_name)="Run End Time"		];
@@ -172,6 +173,7 @@ message Bonus {
 	int32 triggered_max_security		= 15	[(display_name)="Triggered Max Security"	,(skip_zero)=true	];
 	int32 high_alert_combat_kills		= 16	[(display_name)="High Alert Combat Kills"	,(skip_zero)=true	];
 	int32 follower_combat_kills		= 17	[(display_name)="Follower Combat Kills"		,(skip_zero)=true	];
+	int32 destroyed_unchained		= 95	[(display_name)="Destroyed Unchained"		,(skip_zero)=true	];
 	int32 forged_quantum_companion		= 80	[(display_name)="Forged Quantum Companion"	,(skip_zero)=true	];
 	int32 awakened_behemoth_slayer		= 81	[(display_name)="Awakened Behemoth Slayer"	,(skip_zero)=true	];
 	int32 finished_modified_em_gauss	= 82	[(display_name)="Finished Modified EM Gauss"	,(skip_zero)=true	];
@@ -248,7 +250,7 @@ message Bonus {
 	int32 win_speed				= 72	[(display_name)="Win Speed"			,(skip_zero)=true	];
 	int32 challenge_win			= 73	[(display_name)="Challenge Win"			,(skip_zero)=true	];
 	int32 friendly_fire			= 74	[(display_name)="Friendly Fire"			,(skip_zero)=true	];
-	//next = 95
+	//next = 96
 }
 
 //------------------------------------------------------------------
@@ -607,8 +609,8 @@ message Game {
 	int32		game_number		= 11 [(display_name)="Game No."		];
 	repeated int32	game_counts		= 12; // one for each DifficultyType, excluding wizard mode
 	sint32		win_type		= 13 [(display_name)="Win Type"		];
-	int32		win_total		= 14 [(display_name)="Total"		];	
-	repeated int32	win_type_history	= 15 [(display_name)="Types"		];	
+	int32		win_total		= 14 [(display_name)="Total"		];
+	repeated int32	win_type_history	= 15 [(display_name)="Types"		];
 	int32		lore_percent		= 16 [(display_name)="Lore%"		];
 	int32		gallery_percent		= 17 [(display_name)="Gallery%"		];
 	int32		achievement_percent	= 18 [(display_name)="Achievement%"	];
@@ -690,6 +692,11 @@ enum SchematicMethodType {
 	SCHEMATIC_METHOD_ARCHIVE	= 7	[(enum_display_name)="Archive"		];
 	SCHEMATIC_METHOD_EXTRAPOLATED	= 8	[(enum_display_name)="Extrapolated"	];
 }
+enum StudyMethodType {
+	STUDY_METHOD_FREE		= 0	[(enum_display_name)="Free"		];
+	STUDY_METHOD_HACKED		= 1	[(enum_display_name)="Hacked"		];
+	STUDY_METHOD_ARCHIVE		= 2	[(enum_display_name)="Archive"		];
+}
 
 message Route {
 	message Entry {
@@ -720,6 +727,13 @@ message Route {
 			bool	broken		= 3 [(display_name)="Broken"	];
 			bool	corrupted	= 4 [(display_name)="Corrupted"	];
 		}
+		message ObtainedStudy {
+			string			name		= 1 [(display_name)="Study"	];
+			StudyMethodType		method		= 3 [(display_name)="Method"	];
+		}
+		message Factors {
+			repeated int32		factor_one		= 1;
+		}
 		Location			location		= 1;
 		repeated DiscoveredExit		discovered_exits	= 2;
 		string				dominant_class		= 4; // might be empty if none set yet
@@ -727,6 +741,8 @@ message Route {
 		repeated ObtainedSchematic	obtained_schematics	= 6;
 		repeated FabricatedObject	fabricated_objects	= 7;
 		repeated RepairedObject		repaired_objects	= 8;
+		repeated ObtainedStudy		obtained_studies	= 9;
+		Factors				factors			= 10;
 		Stats				stats			= 3;
 	}
 	repeated Entry entries = 1;
@@ -884,6 +900,11 @@ message Stats {
 			int32 constructs_created  = 2 [ (display_name)="Constructs Created"   ,(skip_zero)=true  ];
 			int32 constructs_modified = 3 [ (display_name)="Constructs Modified"  ,(skip_zero)=true  ];
 		}
+		
+		message ScrapSuitUsage {
+			int32 overall             = 1;
+			int32 parts_cannibalized  = 2 [ (display_name)="Parts Cannibalized"   ,(skip_zero)=true  ];
+		}
 
 		SlotsEvolved             slots_evolved              = 1  [ (display_name)="Slots Evolved"               ];
 		PartsAttached            parts_attached             = 2  [ (display_name)="Parts Attached"              ];
@@ -892,11 +913,13 @@ message Stats {
 		UnusedSpares             unused_spares              = 11 [ (display_name)="Unused Spares"               ];
 		AverageSlotUsagePercent  average_slot_usage_percent = 4  [ (display_name)="Average Slot Usage (%)"      ];
 		PeakBuildRating          peak_build_rating          = 9  [ (display_name)="Peak Build Rating"           ];
+		int32                    avg_prop_armor_coverage    = 12 [ (display_name)="Avg Prop Armor Cover (%)"    ];
 		int32                    naked_turns                = 5  [ (display_name)="Naked Turns"                 ];
 		HeaviestBuild            heaviest_build             = 6  [ (display_name)="Heaviest Build"              ];
 		LargestInventoryCapacity largest_inventory_capacity = 7  [ (display_name)="Largest Inventory Capacity"  ];
 		ScrapEngineConsumption   scrap_engine_consumption   = 8  [ (display_name)="Scrap Engine Consumption"    ];
-		// next ID: 12
+		ScrapSuitUsage           scrap_suit_usage           = 13 [ (display_name)="Scrap Suit Usage"            ];
+		// next ID: 14
 	}
 
 	message Resources {
@@ -919,6 +942,12 @@ message Stats {
 			int32 overall   = 1                                ;
 			int32 prevented = 2 [ (display_name)="Prevented"  ];
 		}
+		
+		message PartsRestored {
+			int32 overall = 1                             ;
+			int32 broken  = 2 [ (display_name)="Broken"  ];
+			int32 faulty  = 3 [ (display_name)="Faulty"  ];
+		}
 
 		MatterCollected     matter_collected      = 1 [ (display_name)="Matter Collected"       ];
 		SalvageCreated      salvage_created       = 2 [ (display_name)="Salvage Created"        ];
@@ -926,6 +955,7 @@ message Stats {
 		int32               recyclers_shooed      = 4 [ (display_name)="Recyclers Shooed"       ];
 		PartsFieldRecycled  parts_field_recycled  = 5 [ (display_name)="Parts Field Recycled"   ];
 		PartsSelfDestructed parts_self_destructed = 6 [ (display_name)="Parts Self-Destructed"  ];
+		PartsRestored       parts_restored        = 7 [ (display_name)="Parts Restored"         ];
 	}
 
 	message Kills {
@@ -982,6 +1012,7 @@ message Stats {
 			int32 enhanced_programmer = 36  [ (display_name)="Enhanced Programmer" ,(skip_zero)=true ];
 			int32 enhanced_qseries    = 93  [ (display_name)="Enhanced Q-Series"   ,(skip_zero)=true ];
 			int32 lightning           = 37  [ (display_name)="Lightning"           ,(skip_zero)=true ];
+			int32 clone_special       = 122 [ (display_name)="CL-0N3 Special"      ,(skip_zero)=true ];
 			int32 hotshot             = 116 [ (display_name)="Hotshot"             ,(skip_zero)=true ];
 			int32 decapitator         = 117 [ (display_name)="Decapitator"         ,(skip_zero)=true ];
 			int32 immortal            = 118 [ (display_name)="Immortal"            ,(skip_zero)=true ];
@@ -1054,11 +1085,12 @@ message Stats {
 			int32 dragon              = 86  [ (display_name)="Dragon"              ,(skip_zero)=true ];
 			int32 hydra               = 87  [ (display_name)="Hydra"               ,(skip_zero)=true ];
 			int32 borebot             = 88  [ (display_name)="Borebot"             ,(skip_zero)=true ];
+			int32 unchained           = 121 [ (display_name)="Unchained"           ,(skip_zero)=true ];
 			int32 revision            = 89  [ (display_name)="Revision"            ,(skip_zero)=true ];
 			int32 abomination         = 90  [ (display_name)="Abomination"         ,(skip_zero)=true ];
 			int32 anomaly             = 91  [ (display_name)="Anomaly"             ,(skip_zero)=true ];
 			int32 player              = 92  [ (display_name)="Player"              ,(skip_zero)=true ];
-			// next = 121
+			// next = 123
 		}
 
 		message BestKillStreak {
@@ -1297,10 +1329,11 @@ message Stats {
 				int32 damage_core_  = 9 [ (display_name)="Damage (core)"  ,(skip_zero)=true ];
 			}
 
-			int32   overall                = 1                                             ;
-			int32   average_temperature    = 2 [ (display_name)="Average Temperature"     ];
-			int32   received_heat_transfer = 3 [ (display_name)="Received Heat Transfer"  ];
-			Effects effects                = 4 [ (display_name)="Effects"                 ];
+			int32   overall                    = 1                                                 ;
+			int32   average_temperature        = 2 [ (display_name)="Average Temperature"         ];
+			int32   received_heat_transfer     = 3 [ (display_name)="Received Heat Transfer"      ];
+			int32   thermoelectric_energy_gain = 5 [ (display_name)="Thermoelectric Energy Gain"  ];
+			Effects effects                    = 4 [ (display_name)="Effects"                     ];
 		}
 
 		message SiegeActivations {
@@ -1441,6 +1474,7 @@ message Stats {
 		InfluenceDecreases influence_decreases       = 13 [ (display_name)="Influence Decreases"                       ];
 		SquadsDispatched   squads_dispatched         = 3  [ (display_name)="Squads Dispatched"                         ];
 		int32              searches_triggered        = 11 [ (display_name)="Searches Triggered"                        ];
+		int32              unchained_authorized      = 14 [ (display_name)="Unchained Authorized"    ,(skip_zero)=true ];
 		int32              data_miner_redirects      = 4  [ (display_name)="Data Miner Redirects"    ,(skip_zero)=true ];
 		int32              construction_impeded      = 5  [ (display_name)="Construction Impeded"                      ];
 		int32              haulers_reinforced        = 6  [ (display_name)="Haulers Reinforced"                        ];
@@ -1466,10 +1500,11 @@ message Stats {
 			int32 iff_responses = 2 [ (display_name)="IFF Responses"  ];
 		}
 
-		int32                distress_signals      = 1 [ (display_name)="Distress Signals"       ];
-		CommunicationsJammed communications_jammed = 2 [ (display_name)="Communications Jammed"  ];
-		TimesSpotted         times_spotted         = 3 [ (display_name)="Times Spotted"          ];
-		IdMasksUsed          id_masks_used         = 4 [ (display_name)="ID Masks Used"          ];
+		int32                distress_signals       = 1 [ (display_name)="Distress Signals"       ];
+		CommunicationsJammed communications_jammed  = 2 [ (display_name)="Communications Jammed"  ];
+		TimesSpotted         times_spotted          = 3 [ (display_name)="Times Spotted"          ];
+		int32                ecm_based_alert_blocks = 5 [ (display_name)="ECM-based Alert Blocks" ];
+		IdMasksUsed          id_masks_used          = 4 [ (display_name)="ID Masks Used"          ];
 	}
 
 	message Traps {
@@ -1649,6 +1684,7 @@ message Stats {
 			int32 overall          = 1                                                        ;
 			int32 insert_component = 2 [ (display_name)="Insert Component" ,(skip_zero)=true ];
 			int32 analyze          = 3 [ (display_name)="Analyze"          ,(skip_zero)=true ];
+			int32 retrieve_study   = 4 [ (display_name)="Retrieve Study"   ,(skip_zero)=true ];
 		}
 
 		message GarrisonAccessHacks {
@@ -1804,6 +1840,7 @@ message Stats {
 		HackingDetections       hacking_detections        = 11 [ (display_name)="Hacking Detections"         ];
 		RobotSchematicsAcquired robot_schematics_acquired = 12 [ (display_name)="Robot Schematics Acquired"  ];
 		PartSchematicsAcquired  part_schematics_acquired  = 13 [ (display_name)="Part Schematics Acquired"   ];
+		int32			part_studies_acquired     = 17 [ (display_name)="Part Studies Acquired"      ];
 		PartsRepaired           parts_repaired            = 14 [ (display_name)="Parts Repaired"             ];
 		PartsRecycled           parts_recycled            = 15 [ (display_name)="Parts Recycled"             ];
 		PartsScanalyzed         parts_scanalyzed          = 16 [ (display_name)="Parts Scanalyzed"           ];
@@ -2029,6 +2066,7 @@ message Stats {
 			int32 sensors		= 3  [ (display_name)="Sensors"		];
 			int32 ass		= 4  [ (display_name)="A.S.S."		];
 			int32 iff		= 18 [ (display_name)="IFF"		];
+			int32 zeronet		= 19 [ (display_name)="Zeronet"		];
 			int32 terrain		= 5  [ (display_name)="Terrain"		];
 			int32 structural	= 6  [ (display_name)="Structural"	];
 			int32 traps		= 7  [ (display_name)="Traps"		];
