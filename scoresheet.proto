@@ -173,6 +173,7 @@ message Bonus {
 	int32 triggered_max_security		= 15	[(display_name)="Triggered Max Security"	,(skip_zero)=true	];
 	int32 high_alert_combat_kills		= 16	[(display_name)="High Alert Combat Kills"	,(skip_zero)=true	];
 	int32 follower_combat_kills		= 17	[(display_name)="Follower Combat Kills"		,(skip_zero)=true	];
+	int32 hunted_by_unchained		= 96	[(display_name)="Hunted by Unchained"		,(skip_zero)=true	];
 	int32 destroyed_unchained		= 95	[(display_name)="Destroyed Unchained"		,(skip_zero)=true	];
 	int32 forged_quantum_companion		= 80	[(display_name)="Forged Quantum Companion"	,(skip_zero)=true	];
 	int32 awakened_behemoth_slayer		= 81	[(display_name)="Awakened Behemoth Slayer"	,(skip_zero)=true	];
@@ -219,7 +220,7 @@ message Bonus {
 	int32 met_sigix				= 47	[(display_name)="Met Sigix"			,(skip_zero)=true	];
 	int32 destroyed_superfortress		= 91	[(display_name)="Destroyed Superfortress"	,(skip_zero)=true	];
 	int32 met_optimus_at_protoforge		= 92	[(display_name)="Met Optimus at Protoforge"	,(skip_zero)=true	];
-	int32 completed_drillbomb_mission	= 94	[(display_name)="Completed Drillbomb Mission"	,(skip_zero)=true	];	
+	int32 executed_drillbomb_mission	= 94	[(display_name)="Executed Drillbomb Mission"	,(skip_zero)=true	];	
 	int32 optimus_survived_to_0b1		= 93	[(display_name)="Optimus Survived to 0b1"	,(skip_zero)=true	];	
 	int32 detonated_l2_power_cell		= 48	[(display_name)="Detonated L2 Power Cell"	,(skip_zero)=true	];
 	int32 activated_exoskeleton		= 49	[(display_name)="Activated Exoskeleton"		,(skip_zero)=true	];
@@ -250,7 +251,7 @@ message Bonus {
 	int32 win_speed				= 72	[(display_name)="Win Speed"			,(skip_zero)=true	];
 	int32 challenge_win			= 73	[(display_name)="Challenge Win"			,(skip_zero)=true	];
 	int32 friendly_fire			= 74	[(display_name)="Friendly Fire"			,(skip_zero)=true	];
-	//next = 96
+	//next = 97
 }
 
 //------------------------------------------------------------------
@@ -2046,8 +2047,14 @@ message Stats {
 			int32 kills        = 3 [ (display_name)="Kills"         ];
 		}
 
+		message BorgCreated {
+			int32 overall            = 1                                   			       ;
+			int32 largest_collective = 2 [ (display_name)="Largest Collective"  ,(skip_zero)=true ];
+		}
+
 		TotalAllies            total_allies             = 1  [ (display_name)="Total Allies"                           ];
 		ZioniteDispatches      zionite_dispatches       = 2  [ (display_name)="Zionite Dispatches"                     ];
+		int32                  ufd_resources            = 12 [ (display_name)="Initial UFD Resources"                  ];
 		int32                  warlord_eca_mod          = 11 [ (display_name)="Initial Warlord ECA Mod"                ];
 		WarlordSquadRendezvous warlord_squad_rendezvous = 10 [ (display_name)="Warlord Squad Rendezvous"               ];
 		TotalOrders            total_orders             = 3  [ (display_name)="Total Orders"                           ];
@@ -2057,6 +2064,7 @@ message Stats {
 		int32                  turrets_deployed         = 7  [ (display_name)="Turrets Deployed"     ,(skip_zero)=true ];
 		int32                  fabricated_assembled     = 8  [ (display_name)="Fabricated Assembled" ,(skip_zero)=true ];
 		int32                  field_lobotomies         = 9  [ (display_name)="Field Lobotomies"     ,(skip_zero)=true ];
+		BorgCreated            borg_created             = 13 [ (display_name)="Borg Created"         ,(skip_zero)=true ];
 	}
 
 	message Intel {
